@@ -1,5 +1,6 @@
 package com.example.ivo.gymbuddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,7 +13,10 @@ import android.widget.ImageView;
 public class Home extends AppCompatActivity implements BodyTypes{
 
     int current_body = 0;
+
     Button but;
+    Button b_add_workout;
+
     ImageView body_type;
 
     @Override
@@ -21,6 +25,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         setContentView(R.layout.activity_home);
 
         but = (Button) findViewById(R.id.button);
+        b_add_workout = (Button) findViewById(R.id.LogAWorkout);
+
         body_type = (ImageView) findViewById(R.id.body_type);
 
         but.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +38,14 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
                 body_type.setImageResource(imageList[current_body+1]);
                 current_body++;
+            }
+        });
+
+        b_add_workout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddWorkout.class);
+                startActivity(intent);
             }
         });
     }
