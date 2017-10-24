@@ -16,6 +16,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     Button but;
     Button b_add_workout;
+    Button b_viewWorkouts;
 
     ImageView body_type;
 
@@ -26,6 +27,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
         but = (Button) findViewById(R.id.button);
         b_add_workout = (Button) findViewById(R.id.LogAWorkout);
+        b_viewWorkouts = (Button) findViewById(R.id.b_viewWorkouts);
 
         body_type = (ImageView) findViewById(R.id.body_type);
 
@@ -45,6 +47,14 @@ public class Home extends AppCompatActivity implements BodyTypes{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), AddWorkout.class);
+                startActivity(intent);
+            }
+        });
+
+        b_viewWorkouts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SeeWorkouts.class);
                 startActivity(intent);
             }
         });

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,6 +27,9 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     Button b_save;
     Button b_load;
     TextView textview;
+    EditText et_time;
+
+    Button b_reset;
 
     int data_block = 100; //Reads 100 bytes at a time
 
@@ -38,6 +42,9 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         b_save = (Button) findViewById(R.id.b_save);
         b_load = (Button) findViewById(R.id.b_load);
         textview = (TextView) findViewById(R.id.text);
+        et_time = (EditText) findViewById(R.id.et_time);
+
+        b_reset = (Button) findViewById(R.id.b_reset);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, workouts_list);
 
@@ -56,6 +63,18 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
                 Load();
             }
         });
+
+        b_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    FileOutputStream fou = openFileOutput("text.txt", MODE_PRIVATE);
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
@@ -66,7 +85,12 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
     public void Save()
     {
-        String message = spinner_workouts.getSelectedItem().toString();
+        String message;
+        String s_workout = spinner_workouts.getSelectedItem().toString();
+        String s_time = et_time.getText().toString();
+
+        message = "[" + s_workout + "-" + s_time + "]";
+
         FileOutputStream fou = null;
 
         try {
