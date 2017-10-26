@@ -1,7 +1,11 @@
 package com.example.ivo.gymbuddy;
 
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.icu.util.Output;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,13 +29,9 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
     Spinner spinner_workouts;
     Button b_save;
-    Button b_load;
-    TextView textview;
     EditText et_time;
 
     Button b_reset;
-
-    int data_block = 100; //Reads 100 bytes at a time
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
         spinner_workouts = (Spinner) findViewById(R.id.workouts_spinner);
         b_save = (Button) findViewById(R.id.b_save);
-        b_load = (Button) findViewById(R.id.b_load);
-        textview = (TextView) findViewById(R.id.text);
         et_time = (EditText) findViewById(R.id.et_time);
 
         b_reset = (Button) findViewById(R.id.b_reset);
@@ -54,13 +52,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
             @Override
             public void onClick(View v) {
                 Save();
-            }
-        });
-
-        b_load.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Load();
             }
         });
 
@@ -79,17 +70,22 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
 
     /*
-        Save/Load methods used to save data on file and read from it
+        Save method used to save data on file and read from it
         in Append | Private mode
      */
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void Save()
     {
         String message;
         String s_workout = spinner_workouts.getSelectedItem().toString();
         String s_time = et_time.getText().toString();
 
-        message = "[" + s_workout + "-" + s_time + "]";
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(c.getTime());
+
+        message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
 
         FileOutputStream fou = null;
 
@@ -108,28 +104,5 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         }
     }
 
-    public void Load()
-    {
-        try {
-            FileInputStream fis = openFileInput("text.txt");
-            InputStreamReader isr = new InputStreamReader(fis);
-            char[] data = new char[data_block];
-            String final_data="";
-            int size;
 
-            try {
-                while((size = isr.read(data)) > 0)
-                {
-                    String read_data = String.copyValueOf(data, 0, size);
-                    final_data += read_data;
-                    data = new char[data_block];
-                }
-                textview.setText(final_data);
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        } catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-    }
 }
