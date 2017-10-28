@@ -30,7 +30,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     ImageButton ib_startWorkout;
 
-    int i = 0;
+    int minutes = 0;
+    int seconds = 0;
 
     boolean b_workout = false;
 
@@ -47,6 +48,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         body_type = (ImageView) findViewById(R.id.body_type);
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
 
+        //Change bodytype
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +61,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
+        //Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +70,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
+        //Change activity -> view Workouts
         b_viewWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,37 +79,82 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
-        /*
-        Timer that runs the method every second and increments the timer
-        on click of StartWorkout
-         */
-
+        //Timer
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Timer timer = new Timer();
-
-                b_workout = true;
-
-                tv_timer.setVisibility(View.VISIBLE);
-
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        Home.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                tv_timer.setText(Integer.toString(i));
-                                i++;
-
-                                if(i == 10)
-                                    timer.cancel();
-                            }
-                        });
-                    }
-                }, 1000, 1000);
-
+                createTimer();
             }
         });
     }
 
+
+    /*
+      Timer that runs the method every second and increments the timer
+      on click of StartWorkout
+       */
+    private void createTimer()
+    {
+        final Timer timer = new Timer();
+        tv_timer.setVisibility(View.VISIBLE); //Make timer visible
+
+        /*
+        Toggle between start/end workout using a boolean variable b_workout
+         */
+        if(b_workout)
+            b_workout=false;
+        else
+            b_workout=true;
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Home.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        //Increase i by 1 every second simulating a timer
+                        if(b_workout == true) {
+                            String s_time = getTime(minutes, seconds);
+
+                            tv_timer.setText(s_time);
+                            seconds++;
+                        }
+
+                        //Stop timer and reset it to 0
+                        if(b_workout == false) {
+                            timer.cancel();
+                            tv_timer.setText("");
+                            seconds=0;
+                            tv_timer.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+            }
+        }, 1000, 1000);
+    }
+
+    private String getTime(int minutes, int seconds)
+    {
+        String s_time;
+        String s_seconds = "";
+        String s_minutes = "";
+
+        if(seconds < 10 && seconds >= 0)
+            s_seconds = "0" + seconds;
+        else if(seconds < 60 && seconds >= 10)
+            s_seconds = Integer.toString(seconds);
+        else {
+            seconds = 0;
+            minutes++;
+            s_seconds = "0" + seconds;
+        }
+
+        if(minutes < 10)
+            s_minutes = "0" + minutes;
+        else {
+            s_minutes = Integer.toString(minutes);
+        }
+
+        s_time = s_minutes + ":" + s_seconds;
+        return s_time;
+    }
 }
