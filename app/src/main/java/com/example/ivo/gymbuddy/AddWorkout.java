@@ -1,7 +1,8 @@
 package com.example.ivo.gymbuddy;
 
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
+import java.text.SimpleDateFormat;
+//import android.icu.util.Calendar;
+import java.util.Calendar;
 import android.icu.util.Output;
 import android.os.Build;
 import android.os.Bundle;
@@ -73,8 +74,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         Save method used to save data on file and read from it
         in Append | Private mode
      */
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void Save()
     {
         String message;
@@ -86,7 +85,22 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String formattedDate = df.format(c.getTime());
 
         message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
+        saveFile(message);
+    }
 
+    public void Save(String s_workout, String s_time)
+    {
+        String message;
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(c.getTime());
+
+        message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
+        saveFile(message);
+    }
+
+    public void saveFile(String message)
+    {
         FileOutputStream fou = null;
 
         try {
@@ -103,6 +117,4 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
             e.printStackTrace();
         }
     }
-
-
 }

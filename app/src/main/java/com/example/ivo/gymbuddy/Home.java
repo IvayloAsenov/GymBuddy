@@ -14,8 +14,18 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Home extends AppCompatActivity implements BodyTypes{
 
@@ -48,7 +58,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         body_type = (ImageView) findViewById(R.id.body_type);
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
 
-        //Change bodytype
+        //Change body type
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +93,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //createBullet();
                 createTimer();
             }
         });
@@ -111,20 +122,23 @@ public class Home extends AppCompatActivity implements BodyTypes{
             public void run() {
                 Home.this.runOnUiThread(new Runnable() {
                     public void run() {
+                        String s_time="";
                         //Increase i by 1 every second simulating a timer
                         if(b_workout == true) {
-                            String s_time = getTime(minutes, seconds);
-
+                            s_time = getTime(minutes, seconds);
                             tv_timer.setText(s_time);
                             seconds++;
                         }
 
                         //Stop timer and reset it to 0
                         if(b_workout == false) {
+                            b_workout = true;
                             timer.cancel();
+                            Save("Shoulders",s_time);
                             tv_timer.setText("");
                             seconds=0;
                             tv_timer.setVisibility(View.INVISIBLE);
+                            b_workout=false;
                         }
                     }
                 });
@@ -156,5 +170,35 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
         s_time = s_minutes + ":" + s_seconds;
         return s_time;
+    }
+
+    public void Save(String s_workout, String s_time)
+    {
+        String message;
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = df.format(c.getTime());
+
+        message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
+        saveFile(message);
+    }
+
+    public void saveFile(String message)
+    {
+        FileOutputStream fou = null;
+
+        try {
+            fou = openFileOutput("text.txt", MODE_APPEND | MODE_PRIVATE);
+            OutputStreamWriter osw = new OutputStreamWriter(fou);
+            try {
+                osw.write(message);
+                osw.flush();
+                osw.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
