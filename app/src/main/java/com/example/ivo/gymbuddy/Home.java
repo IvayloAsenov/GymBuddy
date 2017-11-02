@@ -1,12 +1,15 @@
 package com.example.ivo.gymbuddy;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,10 +48,13 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     boolean b_workout = false;
 
+    Dialog myDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //this.setFinishOnTouchOutside(true);
 
         but = (Button) findViewById(R.id.button);
         b_add_workout = (Button) findViewById(R.id.LogAWorkout);
@@ -93,7 +99,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //createBullet();
                 createTimer();
             }
         });
@@ -114,8 +119,10 @@ public class Home extends AppCompatActivity implements BodyTypes{
          */
         if(b_workout)
             b_workout=false;
-        else
+        else{
+            createDialog();
             b_workout=true;
+        }
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -200,5 +207,17 @@ public class Home extends AppCompatActivity implements BodyTypes{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void createDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.choose_workout);
+        builder.setTitle("Choose your workout!");
+
+        AlertDialog dialog = builder.create();
+
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }
