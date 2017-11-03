@@ -9,7 +9,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -57,6 +59,11 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     String workout="";
 
+    RadioButton rb_legs;
+    RadioButton rb_shoulders;
+    RadioButton rb_cycling;
+    RadioGroup rg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,15 +108,22 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
-        //Timer
+        //Start/Stop Workout
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createTimer();
+                if(b_workout)
+                {
+                    b_workout=false;
+                    createTimer();
+                }
+                else{
+                    b_workout=true;
+                    createDialog();
+                }
             }
         });
     }
-
 
     /*
       Timer that runs the method every second and increments the timer
@@ -123,12 +137,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
         /*
         Toggle between start/end workout using a boolean variable b_workout
          */
-        if(b_workout)
-            b_workout=false;
-        else{
-            createDialog();
-            b_workout=true;
-        }
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -145,13 +153,13 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
                         //Stop timer and reset it to 0
                         if(b_workout == false) {
-                            b_workout = true;
                             timer.cancel();
-                            Save(workout,s_time);
+                            b_workout=true;
                             tv_timer.setText("");
                             seconds=0;
                             tv_timer.setVisibility(View.INVISIBLE);
                             b_workout=false;
+                            formatMessage(workout,s_time);
                         }
                     }
                 });
@@ -159,6 +167,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
         }, 1000, 1000);
     }
 
+    /*
+        Formats the time to (minutes):(seconds) time format
+     */
     private String getTime(int minutes, int seconds)
     {
         String s_time;
@@ -185,7 +196,11 @@ public class Home extends AppCompatActivity implements BodyTypes{
         return s_time;
     }
 
-    public void Save(String s_workout, String s_time)
+
+    /*
+        Formats the string that is going to be saved to the file
+     */
+    public void formatMessage(String s_workout, String s_time)
     {
         String message;
         Calendar c = Calendar.getInstance();
@@ -196,7 +211,10 @@ public class Home extends AppCompatActivity implements BodyTypes{
         saveFile(message);
     }
 
-    public void saveFile(String message)
+    /*
+        Writes to save file
+     */
+    private void saveFile(String message)
     {
         FileOutputStream fou = null;
 
@@ -215,26 +233,31 @@ public class Home extends AppCompatActivity implements BodyTypes{
         }
     }
 
-    public void createDialog()
+    /*
+        Creates a pop up dialog that lets the user choose a workout
+     */
+    private void createDialog()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(R.layout.choose_workout);
+
+        LayoutInflater inflater = Home.this.getLayoutInflater();
+        ViewGroup parent = null;
+
+        View view = inflater.inflate(R.layout.choose_workout, parent, false);
+        builder.setView(view);
+
         builder.setTitle("Choose your workout!");
 
         dialog = builder.create();
 
-        final RadioButton rb_legs = (RadioButton) findViewById(R.id.rb_legs);
-        final RadioButton rb_shoulders = (RadioButton) findViewById(R.id.rb_shoulders);
-        final RadioButton rb_cycling = (RadioButton) findViewById(R.id.rb_cycling);
-        final RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
+        rb_legs = (RadioButton) view.findViewById(R.id.rb_legs);
+        rb_shoulders = (RadioButton) view.findViewById(R.id.rb_shoulders);
+        rb_cycling = (RadioButton) view.findViewById(R.id.rb_cycling);
+        rg = (RadioGroup) view.findViewById(R.id.radioGroup);
 
-        Button b_confirm = (Button) findViewById(R.id.b_confirm);
+        Button b_confirm = (Button) view.findViewById(R.id.b_confirm);
 
-
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-
-        /*b_confirm.setOnClickListener(new View.OnClickListener() {
+        b_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = rg.getCheckedRadioButtonId();
@@ -245,11 +268,13 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 else if(id == rb_shoulders.getId())
                     workout = "Shoulders";
 
-                //dialog.cancel();
+                dialog.cancel();
+                createTimer();
             }
 
-        });*/
+        });
 
-        //while(dialog.isShowing());
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }
