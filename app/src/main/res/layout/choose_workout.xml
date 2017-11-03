@@ -10,13 +10,17 @@
         android:layout_height="307dp"
         android:orientation="vertical">
 
-
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup">
         <RadioButton
             android:id="@+id/rb_shoulders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
-            android:text="Shoulders" />
+            android:text="Shoulders"
+            android:checked="true"/>
 
         <RadioButton
             android:id="@+id/rb_cycling"
@@ -31,5 +35,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:text="Legs" />
+    </RadioGroup>
+
+        <Button
+            android:id="@+id/b_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Workout!" />
     </LinearLayout>
 </FrameLayout>
