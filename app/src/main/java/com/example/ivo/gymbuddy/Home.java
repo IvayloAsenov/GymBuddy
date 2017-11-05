@@ -62,6 +62,12 @@ public class Home extends AppCompatActivity implements BodyTypes{
     RadioButton rb_legs;
     RadioButton rb_shoulders;
     RadioButton rb_cycling;
+    RadioButton rb_triceps;
+    RadioButton rb_biceps;
+    RadioButton rb_run;
+    RadioButton rb_back;
+    RadioButton rb_chest;
+
     RadioGroup rg;
 
     @Override
@@ -253,6 +259,13 @@ public class Home extends AppCompatActivity implements BodyTypes{
         rb_legs = (RadioButton) view.findViewById(R.id.rb_legs);
         rb_shoulders = (RadioButton) view.findViewById(R.id.rb_shoulders);
         rb_cycling = (RadioButton) view.findViewById(R.id.rb_cycling);
+        rb_run = (RadioButton) view.findViewById(R.id.rb_run);
+        rb_chest = (RadioButton) view.findViewById(R.id.rb_chest);
+        rb_back = (RadioButton) view.findViewById(R.id.rb_back);
+        rb_biceps = (RadioButton) view.findViewById(R.id.rb_biceps);
+        rb_triceps = (RadioButton) view.findViewById(R.id.rb_triceps);
+
+
         rg = (RadioGroup) view.findViewById(R.id.radioGroup);
 
         Button b_confirm = (Button) view.findViewById(R.id.b_confirm);
@@ -262,11 +275,21 @@ public class Home extends AppCompatActivity implements BodyTypes{
             public void onClick(View v) {
                 int id = rg.getCheckedRadioButtonId();
                 if(id == rb_legs.getId())
-                    workout = "Legs";
+                    workout = "Run";
                 else if(id == rb_cycling.getId())
                     workout = "Cycling";
                 else if(id == rb_shoulders.getId())
+                    workout = "Chest";
+                else if(id == rb_shoulders.getId())
+                    workout = "Back";
+                else if(id == rb_shoulders.getId())
+                    workout = "Biceps";
+                else if(id == rb_shoulders.getId())
+                    workout = "Triceps";
+                else if(id == rb_shoulders.getId())
                     workout = "Shoulders";
+                else if(id == rb_shoulders.getId())
+                    workout = "Legs";
 
                 dialog.cancel();
                 createTimer();
