@@ -13,10 +13,10 @@ public interface BodyTypes
 {
     int[] imageList = new int[]
             {
-                    R.drawable.body_1,
-                    R.drawable.body_2,
-                    R.drawable.body_3,
-                    R.drawable.body_4
+                    R.drawable.body_one,
+                    R.drawable.body_two,
+                    R.drawable.body_three,
+                    R.drawable.body_four
             };
 
     int imageList_size = imageList.length;

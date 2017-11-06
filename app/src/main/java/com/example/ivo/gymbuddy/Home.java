@@ -124,7 +124,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
                     createTimer();
                 }
                 else{
-                    b_workout=true;
                     createDialog();
                 }
             }
@@ -265,7 +264,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
         rb_biceps = (RadioButton) view.findViewById(R.id.rb_biceps);
         rb_triceps = (RadioButton) view.findViewById(R.id.rb_triceps);
 
-
         rg = (RadioGroup) view.findViewById(R.id.radioGroup);
 
         Button b_confirm = (Button) view.findViewById(R.id.b_confirm);
@@ -291,6 +289,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 else if(id == rb_shoulders.getId())
                     workout = "Legs";
 
+                b_workout=true;
                 dialog.cancel();
                 createTimer();
             }
