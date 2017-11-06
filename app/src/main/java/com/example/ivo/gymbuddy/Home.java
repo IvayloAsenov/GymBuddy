@@ -39,26 +39,7 @@ import java.io.OutputStreamWriter;
 
 public class Home extends AppCompatActivity implements BodyTypes{
 
-    int current_body = 0;
-
-    Button but;
-    Button b_add_workout;
-    Button b_viewWorkouts;
-
-    ImageView body_type;
-    TextView tv_timer;
-
-    ImageButton ib_startWorkout;
-
-    int minutes = 0;
-    int seconds = 0;
-
-    boolean b_workout = false;
-
-    AlertDialog dialog;
-
-    String workout="";
-
+    // Declare radio buttons, buttons and image views
     RadioButton rb_legs;
     RadioButton rb_shoulders;
     RadioButton rb_cycling;
@@ -69,6 +50,26 @@ public class Home extends AppCompatActivity implements BodyTypes{
     RadioButton rb_chest;
 
     RadioGroup rg;
+    Button but;
+    Button b_add_workout;
+    Button b_viewWorkouts;
+
+    ImageView body_type;
+    TextView tv_timer;
+
+    ImageButton ib_startWorkout;
+
+    // Minutes and seconds for the timer
+    int minutes = 0;
+    int seconds = 0;
+
+    boolean b_workout = false; // Variable to start/end workout
+
+    AlertDialog dialog; // Dialog that will pop up when starting workout
+
+    String workout=""; // String that will hold the current workout
+
+    int current_body = 0; // Variable used to cycle through body types
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         body_type = (ImageView) findViewById(R.id.body_type);
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
 
-        //Change body type
+        // Change body type by going through the array
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +97,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
-        //Change activity -> add Workout
+        // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +106,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
-        //Change activity -> view Workouts
+        // Change activity -> view Workouts
         b_viewWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,18 +115,17 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
-        //Start/Stop Workout
+        // Start/Stop Workout
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(b_workout)
+                if(b_workout) // Stop workout, stop timer and save to file
                 {
                     b_workout=false;
                     createTimer();
                 }
-                else{
-                    createDialog();
-                }
+                else
+                    createDialog(); // If no workout started, then start a new one
             }
         });
     }

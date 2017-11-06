@@ -31,7 +31,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     Spinner spinner_workouts;
     Button b_save;
     EditText et_time;
-
     Button b_reset;
 
     @Override
