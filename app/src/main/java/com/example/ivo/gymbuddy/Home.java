@@ -1,7 +1,9 @@
 package com.example.ivo.gymbuddy;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -70,6 +73,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
     String workout=""; // String that will hold the current workout
 
     int current_body = 0; // Variable used to cycle through body types
+
+    public int workout_counter; // Public variable used to count workouts
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -299,4 +304,5 @@ public class Home extends AppCompatActivity implements BodyTypes{
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
+
 }

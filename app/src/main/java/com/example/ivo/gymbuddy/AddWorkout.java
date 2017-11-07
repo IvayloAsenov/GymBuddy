@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -101,6 +102,20 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     public void saveFile(String message)
     {
         FileOutputStream fou = null;
+
+        WorkoutCounter wc = new WorkoutCounter(this);
+
+        int workout_counter = wc.readWCounter();
+        wc.writeWCounter();
+        wc.setWCounter(workout_counter+1);
+
+        workout_counter = wc.getWCounter();
+
+        if(workout_counter > 2)
+        {
+            wc.setWCounter(0);
+            Toast.makeText(getApplicationContext(), " test", Toast.LENGTH_LONG).show();
+        }
 
         try {
             fou = openFileOutput("text.txt", MODE_APPEND | MODE_PRIVATE);
