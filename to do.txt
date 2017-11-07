@@ -1,0 +1,8 @@
+Back end:
+- First time start activity (jon)
+- Every x workouts slim down person
+
+Front end:
+- UI
+- More images
+- Animations
