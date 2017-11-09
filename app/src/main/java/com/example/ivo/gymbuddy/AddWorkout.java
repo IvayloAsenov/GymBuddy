@@ -69,7 +69,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         });
     }
 
-
     /*
         Save method used to save data on file and read from it
         in Append | Private mode
@@ -111,9 +110,13 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
         workout_counter = wc.getWCounter();
 
-        if(workout_counter > 2)
+        if(workout_counter > 5)
         {
             wc.setWCounter(0);
+            BodyType bt = new BodyType(this);
+
+            bt.changeBType();
+            bt.writeWCounter();
             Toast.makeText(getApplicationContext(), " test", Toast.LENGTH_LONG).show();
         }
 

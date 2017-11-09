@@ -86,21 +86,24 @@ public class Home extends AppCompatActivity implements BodyTypes{
         b_viewWorkouts = (Button) findViewById(R.id.b_viewWorkouts);
 
         tv_timer = (TextView) findViewById(R.id.tv_timer);
-        body_type = (ImageView) findViewById(R.id.body_type);
+        //body_type = (ImageView) findViewById(R.id.iv_body_type);
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
 
+        BodyType bt = new BodyType(this);
+        //bt.changeBType();
+
         // Change body type by going through the array
-        but.setOnClickListener(new View.OnClickListener() {
+       /* but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(current_body+1 >= imageList_size)
                     current_body=-1;
 
-                body_type.setImageResource(imageList[current_body+1]);
+               // body_type.setImageResource(imageList[current_body+1]);
                 current_body++;
             }
-        });
+        });*/
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -304,5 +307,4 @@ public class Home extends AppCompatActivity implements BodyTypes{
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
-
 }

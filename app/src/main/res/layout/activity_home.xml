@@ -7,7 +7,7 @@
     tools:context="com.example.ivo.gymbuddy.Home">
 
     <ImageView
-        android:id="@+id/body_type"
+        android:id="@+id/iv_body_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/body_one"
