@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -102,22 +103,33 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     {
         FileOutputStream fou = null;
 
-        WorkoutCounter wc = new WorkoutCounter(this);
+        WorkoutCounter wc = new WorkoutCounter(this); // Create object
 
-        int workout_counter = wc.readWCounter();
-        wc.writeWCounter();
+        int workout_counter = wc.readWCounter(); // Get current value
+        wc.writeWCounter(); // Save the wc + 1 to shared preferences
         wc.setWCounter(workout_counter+1);
 
         workout_counter = wc.getWCounter();
+        //Toast.makeText(getApplicationContext(), " test" + workout_counter, Toast.LENGTH_LONG).show();
+        //Log.d("Tag", "workout counter" + workout_counter);
 
         if(workout_counter > 5)
         {
             wc.setWCounter(0);
+            wc.writeWCounter();
             BodyType bt = new BodyType(this);
 
-            bt.changeBType();
+            int bt_c = bt.readBType();
             bt.writeWCounter();
-            Toast.makeText(getApplicationContext(), " test", Toast.LENGTH_LONG).show();
+            bt.setWCounter(bt_c + 1);
+
+            if(bt_c >= 4){
+                bt.setWCounter(0);
+                bt.writeWCounter();
+            }
+
+            bt.changeBType();
+         //   Toast.makeText(getApplicationContext(), " test" + workout_counter, Toast.LENGTH_LONG).show();
         }
 
         try {

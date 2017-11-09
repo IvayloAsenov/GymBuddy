@@ -1,11 +1,17 @@
 package com.example.ivo.gymbuddy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.Image;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * Created by Ivo on 11/8/2017.
@@ -15,6 +21,7 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
 
     static private int body_type = 0;
     private Context context;
+    ImageView iv_body_type;
 
     public BodyType(Context context)
     {
@@ -26,13 +33,13 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
         int bt = 0;
         SharedPreferences sharedPref = context.getSharedPreferences("saved_body_type",Context.MODE_PRIVATE);
         int defaultValue = 0;
-        bt = sharedPref.getInt("saved_workout_counter", defaultValue);
+        bt = sharedPref.getInt("saved_body_type", defaultValue);
         return bt;
     }
 
     protected void writeWCounter()
     {
-        SharedPreferences sharedPref = context.getSharedPreferences("saved_body_type", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("saved_body_type", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("saved_body_type", body_type+1);
         editor.commit();
@@ -50,7 +57,15 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
 
     protected void changeBType()
     {
-       // ImageView iv_body_type = (ImageView) context.get
-      //  iv_body_type.setImageResource(imageList[readBType()+1]);
+        View v = LayoutInflater.from(context).inflate(R.layout.activity_home, null, false);
+        iv_body_type = (ImageView) v.findViewById(R.id.iv_body_type);
+
+       // LayoutInflater inflater = (LayoutInflater) getContext().get
+        Log.d("test", ""+readBType());
+        //Log.d("CACA", " " + readBType());
+        iv_body_type.setImageResource(imageList[readBType()+1]);
+
+        //Toast.makeText(getApplicationContext(), " test" + imageList[readBType()], Toast.LENGTH_LONG).show();
+        //iv_body_type.setImageResource(imageList[readBType()+1]);
     }
 }
