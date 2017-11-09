@@ -31,7 +31,7 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
     protected int readBType()
     {
         int bt = 0;
-        SharedPreferences sharedPref = context.getSharedPreferences("saved_body_type",Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         int defaultValue = 0;
         bt = sharedPref.getInt("saved_body_type", defaultValue);
         return bt;
@@ -39,7 +39,7 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
 
     protected void writeWCounter()
     {
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("saved_body_type", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("saved_body_type", body_type+1);
         editor.commit();
@@ -59,13 +59,7 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
     {
         View v = LayoutInflater.from(context).inflate(R.layout.activity_home, null, false);
         iv_body_type = (ImageView) v.findViewById(R.id.iv_body_type);
-
-       // LayoutInflater inflater = (LayoutInflater) getContext().get
         Log.d("test", ""+readBType());
-        //Log.d("CACA", " " + readBType());
         iv_body_type.setImageResource(imageList[readBType()+1]);
-
-        //Toast.makeText(getApplicationContext(), " test" + imageList[readBType()], Toast.LENGTH_LONG).show();
-        //iv_body_type.setImageResource(imageList[readBType()+1]);
     }
 }

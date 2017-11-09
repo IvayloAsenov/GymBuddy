@@ -30,16 +30,6 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
-
-
 public class Home extends AppCompatActivity implements BodyTypes{
 
     // Declare radio buttons, buttons and image views
@@ -76,10 +66,16 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     public int workout_counter; // Public variable used to count workouts
 
+    SaveFile sf;
+    BodyType bt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        sf = new SaveFile(this);
+        bt = new BodyType(this);
 
         but = (Button) findViewById(R.id.button);
         b_add_workout = (Button) findViewById(R.id.LogAWorkout);
@@ -88,22 +84,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
         tv_timer = (TextView) findViewById(R.id.tv_timer);
         //body_type = (ImageView) findViewById(R.id.iv_body_type);
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
-
-        BodyType bt = new BodyType(this);
-        //bt.changeBType();
-
-        // Change body type by going through the array
-       /* but.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(current_body+1 >= imageList_size)
-                    current_body=-1;
-
-               // body_type.setImageResource(imageList[current_body+1]);
-                current_body++;
-            }
-        });*/
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -132,8 +112,10 @@ public class Home extends AppCompatActivity implements BodyTypes{
                     b_workout=false;
                     createTimer();
                 }
-                else
+                else{
                     createDialog(); // If no workout started, then start a new one
+
+                }
             }
         });
     }
@@ -221,30 +203,12 @@ public class Home extends AppCompatActivity implements BodyTypes{
         String formattedDate = df.format(c.getTime());
 
         message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
-        saveFile(message);
+        sf.saveToFile(message);
     }
 
     /*
         Writes to save file
      */
-    private void saveFile(String message)
-    {
-        FileOutputStream fou = null;
-
-        try {
-            fou = openFileOutput("text.txt", MODE_APPEND | MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(fou);
-            try {
-                osw.write(message);
-                osw.flush();
-                osw.close();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     /*
         Creates a pop up dialog that lets the user choose a workout

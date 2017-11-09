@@ -3,6 +3,8 @@ package com.example.ivo.gymbuddy;
 import java.text.SimpleDateFormat;
 //import android.icu.util.Calendar;
 import java.util.Calendar;
+
+import android.content.Context;
 import android.icu.util.Output;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,11 +36,23 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     Button b_save;
     EditText et_time;
     Button b_reset;
+    Context home_context;
+    SaveFile sf;
+
+    public AddWorkout(Context context){
+        home_context = context;
+    }
+
+    public AddWorkout(){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_workout);
+
+        sf = new SaveFile(this);
 
         spinner_workouts = (Spinner) findViewById(R.id.workouts_spinner);
         b_save = (Button) findViewById(R.id.b_save);
@@ -74,6 +88,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         Save method used to save data on file and read from it
         in Append | Private mode
      */
+
     public void Save()
     {
         String message;
@@ -85,7 +100,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String formattedDate = df.format(c.getTime());
 
         message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
-        saveFile(message);
+        sf.saveToFile(message);
     }
 
     public void Save(String s_workout, String s_time)
@@ -96,54 +111,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String formattedDate = df.format(c.getTime());
 
         message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
-        saveFile(message);
-    }
-
-    public void saveFile(String message)
-    {
-        FileOutputStream fou = null;
-
-        WorkoutCounter wc = new WorkoutCounter(this); // Create object
-
-        int workout_counter = wc.readWCounter(); // Get current value
-        wc.writeWCounter(); // Save the wc + 1 to shared preferences
-        wc.setWCounter(workout_counter+1);
-
-        workout_counter = wc.getWCounter();
-        //Toast.makeText(getApplicationContext(), " test" + workout_counter, Toast.LENGTH_LONG).show();
-        //Log.d("Tag", "workout counter" + workout_counter);
-
-        if(workout_counter > 5)
-        {
-            wc.setWCounter(0);
-            wc.writeWCounter();
-            BodyType bt = new BodyType(this);
-
-            int bt_c = bt.readBType();
-            bt.writeWCounter();
-            bt.setWCounter(bt_c + 1);
-
-            if(bt_c >= 4){
-                bt.setWCounter(0);
-                bt.writeWCounter();
-            }
-
-            bt.changeBType();
-         //   Toast.makeText(getApplicationContext(), " test" + workout_counter, Toast.LENGTH_LONG).show();
-        }
-
-        try {
-            fou = openFileOutput("text.txt", MODE_APPEND | MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(fou);
-            try {
-                osw.write(message);
-                osw.flush();
-                osw.close();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        sf.saveToFile(message);
     }
 }
