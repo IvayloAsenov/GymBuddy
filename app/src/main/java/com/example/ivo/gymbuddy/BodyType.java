@@ -37,29 +37,11 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
         return bt;
     }
 
-    protected void writeWCounter()
+    protected void writeBCounter(int bt)
     {
         SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("saved_body_type", body_type+1);
+        editor.putInt("saved_body_type", bt);
         editor.commit();
-    }
-
-    protected int getWCounter()
-    {
-        return body_type;
-    }
-
-    protected void setWCounter(int bt)
-    {
-        body_type = bt;
-    }
-
-    protected void changeBType()
-    {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_home, null, false);
-        iv_body_type = (ImageView) v.findViewById(R.id.iv_body_type);
-        Log.d("test", ""+readBType());
-        iv_body_type.setImageResource(imageList[readBType()+1]);
     }
 }

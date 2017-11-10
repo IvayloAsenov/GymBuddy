@@ -11,6 +11,9 @@ package com.example.ivo.gymbuddy;
 
 public interface BodyTypes
 {
+
+    final int BODY_CHANGE = 0;
+
     int[] imageList = new int[]
             {
                     R.drawable.body_one,

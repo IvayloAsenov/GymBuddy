@@ -26,21 +26,11 @@ public class WorkoutCounter extends AppCompatActivity
         return wc;
     }
 
-    protected void writeWCounter()
+    protected void writeWCounter(int wc)
     {
         SharedPreferences sharedPref = context.getSharedPreferences("saved_workout_counter", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("saved_workout_counter", workout_counter+1);
+        editor.putInt("saved_workout_counter", wc);
         editor.commit();
-    }
-
-    protected int getWCounter()
-    {
-        return workout_counter;
-    }
-
-    protected void setWCounter(int wc)
-    {
-        workout_counter = wc;
     }
 }

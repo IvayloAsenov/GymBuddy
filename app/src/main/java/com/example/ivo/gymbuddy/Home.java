@@ -43,11 +43,11 @@ public class Home extends AppCompatActivity implements BodyTypes{
     RadioButton rb_chest;
 
     RadioGroup rg;
-    Button but;
+
     Button b_add_workout;
     Button b_viewWorkouts;
 
-    ImageView body_type;
+    ImageView iv_body_type;
     TextView tv_timer;
 
     ImageButton ib_startWorkout;
@@ -64,25 +64,33 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     int current_body = 0; // Variable used to cycle through body types
 
-    public int workout_counter; // Public variable used to count workouts
+    private int workout_counter; // Public variable used to count workouts
 
+    // Declare objects
     SaveFile sf;
     BodyType bt;
+    WorkoutCounter wc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Create objects
         sf = new SaveFile(this);
         bt = new BodyType(this);
+        wc = new WorkoutCounter(this);
 
-        but = (Button) findViewById(R.id.button);
+        // Create views
         b_add_workout = (Button) findViewById(R.id.LogAWorkout);
         b_viewWorkouts = (Button) findViewById(R.id.b_viewWorkouts);
 
         tv_timer = (TextView) findViewById(R.id.tv_timer);
-        //body_type = (ImageView) findViewById(R.id.iv_body_type);
+        iv_body_type = (ImageView) findViewById(R.id.iv_body_type);
+
+        current_body = bt.readBType();
+        iv_body_type.setImageResource(imageList[current_body]);
+
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
 
         // Change activity -> add Workout
@@ -111,6 +119,22 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 {
                     b_workout=false;
                     createTimer();
+                    int workout_counter = wc.readWCounter();
+                    if(workout_counter > BODY_CHANGE){
+                        wc.writeWCounter(0);
+
+                        current_body = bt.readBType();
+
+                        if(current_body+1 >= imageList_size){
+                            wc.writeWCounter(0);
+                            bt.writeBCounter(0);
+                            iv_body_type.setImageResource(imageList[0]);
+                        }else{
+                            bt.writeBCounter(current_body+1);
+                            iv_body_type.setImageResource(imageList[current_body+1]);
+                        }
+                    }else
+                        wc.writeWCounter(workout_counter+1);
                 }
                 else{
                     createDialog(); // If no workout started, then start a new one
@@ -152,7 +176,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
                             b_workout=true;
                             tv_timer.setText("");
                             seconds=0;
-                            tv_timer.setVisibility(View.INVISIBLE);
+                            //tv_timer.setVisibility(View.INVISIBLE);
                             b_workout=false;
                             formatMessage(workout,s_time);
                         }

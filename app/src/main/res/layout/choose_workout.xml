@@ -7,75 +7,82 @@
 
     <LinearLayout
         android:layout_width="275dp"
-        android:layout_height="307dp"
+        android:layout_height="400dp"
         android:orientation="vertical">
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroup">
-        <RadioButton
-            android:id="@+id/rb_shoulders"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Shoulders"
-            android:checked="true"/>
-
-        <RadioButton
-            android:id="@+id/rb_cycling"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Cycling" />
-
-        <RadioButton
-            android:id="@+id/rb_legs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Legs" />
-
-        <RadioButton
-            android:id="@+id/rb_chest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Chest" />
-
-        <RadioButton
-            android:id="@+id/rb_triceps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Triceps" />
-
-        <RadioButton
-            android:id="@+id/rb_biceps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Biceps" />
-
-        <RadioButton
-            android:id="@+id/rb_back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Back" />
-
-        <RadioButton
-            android:id="@+id/rb_run"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:text="Run" />
-    </RadioGroup>
 
         <Button
             android:id="@+id/b_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Workout!" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rb_shoulders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:checked="true"
+                    android:text="Shoulders" />
+
+                <RadioButton
+                    android:id="@+id/rb_cycling"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Cycling" />
+
+                <RadioButton
+                    android:id="@+id/rb_legs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Legs" />
+
+                <RadioButton
+                    android:id="@+id/rb_chest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Chest" />
+
+                <RadioButton
+                    android:id="@+id/rb_triceps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Triceps" />
+
+                <RadioButton
+                    android:id="@+id/rb_biceps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Biceps" />
+
+                <RadioButton
+                    android:id="@+id/rb_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Back" />
+
+                <RadioButton
+                    android:id="@+id/rb_run"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Run" />
+            </RadioGroup>
+        </ScrollView>
+
     </LinearLayout>
 </FrameLayout>
