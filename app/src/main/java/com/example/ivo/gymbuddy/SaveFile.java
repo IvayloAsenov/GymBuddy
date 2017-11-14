@@ -38,4 +38,24 @@ public class SaveFile extends AppCompatActivity{
             e.printStackTrace();
         }
     }
+
+    public void saveToFile(User newUser) {
+        FileOutputStream fou = null;
+        try {
+            fou = context.openFileOutput("text2.txt", MODE_APPEND | MODE_PRIVATE);
+            OutputStreamWriter osw = new OutputStreamWriter(fou);
+            try {
+                osw.write(newUser.getName());
+                osw.write(newUser.getEmail());
+                osw.write(newUser.getAge());
+                osw.write(newUser.getGender());
+                osw.flush();
+                osw.close();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

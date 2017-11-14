@@ -28,6 +28,7 @@
             android:name=".SeeWorkouts"
             android:label="@string/title_activity_see_workouts"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+            
     </application>
 
 </manifest>
