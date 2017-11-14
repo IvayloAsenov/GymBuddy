@@ -27,8 +27,6 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Home extends AppCompatActivity implements BodyTypes{
 
@@ -51,6 +49,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
     TextView tv_timer;
 
     ImageButton ib_startWorkout;
+    ImageButton ib_pauseWorkout;
+    ImageButton ib_stopWorkout;
+
 
     // Minutes and seconds for the timer
     int minutes = 0;
@@ -70,6 +71,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     SaveFile sf;
     BodyType bt;
     WorkoutCounter wc;
+    TimerSwitch t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         sf = new SaveFile(this);
         bt = new BodyType(this);
         wc = new WorkoutCounter(this);
+        t = new TimerSwitch(this);
 
         // Create views
         b_add_workout = (Button) findViewById(R.id.LogAWorkout);
@@ -92,6 +95,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         iv_body_type.setImageResource(imageList[current_body]);
 
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
+        ib_stopWorkout = (ImageButton) findViewById(R.id.ib_stopWorkout);
+        ib_pauseWorkout = (ImageButton) findViewById(R.id.ib_pauseWorkout);
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -111,128 +116,55 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
 
-        // Start/Stop Workout
+        // Start timer
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(b_workout) // Stop workout, stop timer and save to file
-                {
-                    b_workout=false;
-                    createTimer();
-                    int workout_counter = wc.readWCounter();
-                    if(workout_counter > BODY_CHANGE){
-                        wc.writeWCounter(0);
+                ib_startWorkout.setVisibility(View.INVISIBLE);
+                ib_startWorkout.setClickable(false);
+                ib_stopWorkout.setClickable(true);
+                ib_stopWorkout.setVisibility(View.VISIBLE);
+                ib_pauseWorkout.setClickable(true);
+                ib_pauseWorkout.setVisibility(View.VISIBLE);
+                createDialog();
+            }
+        });
 
-                        current_body = bt.readBType();
+        ib_stopWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ib_stopWorkout.setClickable(false);
+                ib_stopWorkout.setVisibility(View.INVISIBLE);
+                ib_pauseWorkout.setClickable(false);
+                ib_pauseWorkout.setVisibility(View.INVISIBLE);
+                ib_startWorkout.setVisibility(View.VISIBLE);
+                ib_startWorkout.setClickable(true);
+                String s_time = t.stopTimer();
+                formatMessage(workout, s_time);
+            }
+        });
 
-                        if(current_body+1 >= imageList_size){
-                            wc.writeWCounter(0);
-                            bt.writeBCounter(0);
-                            iv_body_type.setImageResource(imageList[0]);
-                        }else{
-                            bt.writeBCounter(current_body+1);
-                            iv_body_type.setImageResource(imageList[current_body+1]);
-                        }
-                    }else
-                        wc.writeWCounter(workout_counter+1);
-                }
-                else{
-                    createDialog(); // If no workout started, then start a new one
-
-                }
+        ib_pauseWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                t.pauseTimer();
             }
         });
     }
 
     /*
-      Timer that runs the method every second and increments the timer
-      on click of StartWorkout
-       */
-    private void createTimer()
-    {
-        final Timer timer = new Timer();
-        tv_timer.setVisibility(View.VISIBLE); //Make timer visible
-
-        /*
-        Toggle between start/end workout using a boolean variable b_workout
-         */
-
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Home.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        String s_time="";
-                        //Increase i by 1 every second simulating a timer
-                        if(b_workout == true) {
-                            s_time = getTime(minutes, seconds);
-                            tv_timer.setText(s_time);
-                            seconds++;
-                        }
-
-                        //Stop timer and reset it to 0
-                        if(b_workout == false) {
-                            timer.cancel();
-                            b_workout=true;
-                            tv_timer.setText("");
-                            seconds=0;
-                            //tv_timer.setVisibility(View.INVISIBLE);
-                            b_workout=false;
-                            formatMessage(workout,s_time);
-                        }
-                    }
-                });
-            }
-        }, 1000, 1000);
-    }
-
-    /*
-        Formats the time to (minutes):(seconds) time format
-     */
-    private String getTime(int minutes, int seconds)
-    {
-        String s_time;
-        String s_seconds = "";
-        String s_minutes = "";
-
-        if(seconds < 10 && seconds >= 0)
-            s_seconds = "0" + seconds;
-        else if(seconds < 60 && seconds >= 10)
-            s_seconds = Integer.toString(seconds);
-        else {
-            seconds = 0;
-            minutes++;
-            s_seconds = "0" + seconds;
-        }
-
-        if(minutes < 10)
-            s_minutes = "0" + minutes;
-        else {
-            s_minutes = Integer.toString(minutes);
-        }
-
-        s_time = s_minutes + ":" + s_seconds;
-        return s_time;
-    }
-
-
-    /*
         Formats the string that is going to be saved to the file
      */
-    public void formatMessage(String s_workout, String s_time)
+    public void formatMessage(String workout, String s_time)
     {
         String message;
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c.getTime());
 
-        message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
+        message = "[" + formattedDate + " " + workout + " " + s_time + " ";
         sf.saveToFile(message);
     }
-
-    /*
-        Writes to save file
-     */
 
     /*
         Creates a pop up dialog that lets the user choose a workout
@@ -287,7 +219,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
                 b_workout=true;
                 dialog.cancel();
-                createTimer();
+                t.startTimer();
             }
 
         });
