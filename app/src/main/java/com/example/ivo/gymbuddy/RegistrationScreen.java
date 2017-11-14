@@ -15,6 +15,7 @@ import android.widget.Spinner;
 public class RegistrationScreen extends AppCompatActivity implements AgesGenders {
     EditText et_name;
     EditText et_email;
+    EditText et_password;
     Button b_register;
     Spinner s_age;
     Spinner s_gender;
@@ -24,6 +25,8 @@ public class RegistrationScreen extends AppCompatActivity implements AgesGenders
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registration_screen);
+
+        et_password = (EditText) findViewById(R.id.editText3);
 
         sf_users = new SaveFile(this);
 
@@ -54,9 +57,10 @@ public class RegistrationScreen extends AppCompatActivity implements AgesGenders
     protected User createUser() {
         String userName = et_name.getText().toString();
         String userEmail = et_email.getText().toString();
+        String userPassword = et_password.getText().toString();
         String userAge = s_age.getSelectedItem().toString();
         String userGender = s_gender.getSelectedItem().toString();
-        return new User(userName, userEmail, userAge, userGender);
+        return new User(userName, userEmail, userPassword, userAge, userGender);
     }
 
 }

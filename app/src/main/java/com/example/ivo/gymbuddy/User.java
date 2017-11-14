@@ -5,9 +5,10 @@ package com.example.ivo.gymbuddy;
  */
 
 public class User {
-    public User(String name_, String email_, String age_, String gender_) {
+    public User(String name_, String email_, String passowrd_, String age_, String gender_) {
         name = name_;
         email = email_;
+        passowrd = passowrd_;
         age = age_;
         gender = gender_;
     }
@@ -28,7 +29,9 @@ public class User {
         return gender;
     }
 
+    public String getPassowrd() {return passowrd; }
 
-    private String name, email, age, gender;
+
+    private String name, email, passowrd, age, gender;
 
 }
