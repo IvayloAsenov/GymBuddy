@@ -12,6 +12,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -72,6 +74,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     BodyType bt;
     WorkoutCounter wc;
     TimerSwitch t;
+    Challenges c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         bt = new BodyType(this);
         wc = new WorkoutCounter(this);
         t = new TimerSwitch(this);
+        c = new Challenges(this);
 
         // Create views
         b_add_workout = (Button) findViewById(R.id.LogAWorkout);
@@ -151,7 +155,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
     }
-
     /*
         Formats the string that is going to be saved to the file
      */

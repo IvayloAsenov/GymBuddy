@@ -3,4 +3,15 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_add_workout">AddWorkout</string>
     <string name="title_activity_see_workouts">SeeWorkouts</string>
+
+    <string name="daily_challenge_01">Workout for at least 30 minutes</string>
+    <string name="daily_challenge_02">Do a different workout than yesterday</string>
+    <string name="daily_challenge_03">Workout your legs</string>
+    <string name="daily_challenge_04">Workout your chest</string>
+    <string name="daily_challenge_05">Workout your triceps</string>
+    <string name="daily_challenge_06">Workout your back</string>
+
+    <string name="weekly_challenge_01">Workout at least 4 times this week</string>
+    <string name="weekly_challenge_02">Exercise for more than 4 hours this week</string>
+    <string name="weekly_challenge_03">Do at least 4 different workouts this week</string>
 </resources>
