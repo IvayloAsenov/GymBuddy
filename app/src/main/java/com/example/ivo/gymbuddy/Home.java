@@ -44,8 +44,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     RadioGroup rg;
 
-    Button b_add_workout;
-    Button b_viewWorkouts;
+    ImageButton b_add_workout;
+    ImageButton b_viewWorkouts;
 
     ImageView iv_body_type;
     TextView tv_timer;
@@ -89,8 +89,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         c = new Challenges(this);
 
         // Create views
-        b_add_workout = (Button) findViewById(R.id.LogAWorkout);
-        b_viewWorkouts = (Button) findViewById(R.id.b_viewWorkouts);
+        b_add_workout = (ImageButton) findViewById(R.id.LogAWorkout);
+        b_viewWorkouts = (ImageButton) findViewById(R.id.b_viewWorkouts);
 
         tv_timer = (TextView) findViewById(R.id.tv_timer);
         iv_body_type = (ImageView) findViewById(R.id.iv_body_type);
