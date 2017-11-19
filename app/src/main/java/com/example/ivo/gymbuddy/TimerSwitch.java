@@ -59,7 +59,8 @@ class TimerSwitch {
     protected void pauseTimer(){
         if(!paused){
             TimeBuff += MillisecondTime;
-            handler.removeCallbacks(runnable);
+            //handler.removeCallbacks(runnable);
+            handler.removeMessages(0);
             paused = true;
         }else{
             StartTime = SystemClock.uptimeMillis();

@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,15 +34,6 @@ import java.util.Calendar;
 public class Home extends AppCompatActivity implements BodyTypes{
 
     // Declare radio buttons, buttons and image views
-    RadioButton rb_legs;
-    RadioButton rb_shoulders;
-    RadioButton rb_cycling;
-    RadioButton rb_triceps;
-    RadioButton rb_biceps;
-    RadioButton rb_run;
-    RadioButton rb_back;
-    RadioButton rb_chest;
-
     RadioGroup rg;
 
     ImageButton b_add_workout;
@@ -61,7 +53,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     boolean b_workout = false; // Variable to start/end workout
 
-    AlertDialog dialog; // Dialog that will pop up when starting workout
+    //AlertDialog dialog; // Dialog that will pop up when starting workout
 
     String workout=""; // String that will hold the current workout
 
@@ -174,51 +166,42 @@ public class Home extends AppCompatActivity implements BodyTypes{
      */
     private void createDialog()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        LayoutInflater inflater = Home.this.getLayoutInflater();
-        ViewGroup parent = null;
+       // LayoutInflater inflater = Home.this.getLayoutInflater();
+        //ViewGroup parent = null;
 
-        View view = inflater.inflate(R.layout.choose_workout, parent, false);
-        builder.setView(view);
+       // View view = inflater.inflate(R.layout.choose_workout, parent, false);
+       // builder.setView(view);
 
-        builder.setTitle("Choose your workout!");
+      //  builder.setTitle("Choose your workout!");
 
-        dialog = builder.create();
+       // dialog = builder.create();
 
-        rb_legs = (RadioButton) view.findViewById(R.id.rb_legs);
-        rb_shoulders = (RadioButton) view.findViewById(R.id.rb_shoulders);
-        rb_cycling = (RadioButton) view.findViewById(R.id.rb_cycling);
-        rb_run = (RadioButton) view.findViewById(R.id.rb_run);
-        rb_chest = (RadioButton) view.findViewById(R.id.rb_chest);
-        rb_back = (RadioButton) view.findViewById(R.id.rb_back);
-        rb_biceps = (RadioButton) view.findViewById(R.id.rb_biceps);
-        rb_triceps = (RadioButton) view.findViewById(R.id.rb_triceps);
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.choose_workout);
 
-        rg = (RadioGroup) view.findViewById(R.id.radioGroup);
-
-        Button b_confirm = (Button) view.findViewById(R.id.b_confirm);
-
-        b_confirm.setOnClickListener(new View.OnClickListener() {
+        /*b_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = rg.getCheckedRadioButtonId();
+
                 if(id == rb_legs.getId())
-                    workout = "Run";
+                    workout = "Legs";
                 else if(id == rb_cycling.getId())
                     workout = "Cycling";
                 else if(id == rb_shoulders.getId())
-                    workout = "Chest";
-                else if(id == rb_shoulders.getId())
-                    workout = "Back";
-                else if(id == rb_shoulders.getId())
-                    workout = "Biceps";
-                else if(id == rb_shoulders.getId())
-                    workout = "Triceps";
-                else if(id == rb_shoulders.getId())
                     workout = "Shoulders";
-                else if(id == rb_shoulders.getId())
-                    workout = "Legs";
+                else if(id == rb_chest.getId())
+                    workout = "Chest";
+                else if(id == rb_back.getId())
+                    workout = "Back";
+                else if(id == rb_biceps.getId())
+                    workout = "Biceps";
+                else if(id == rb_triceps.getId())
+                    workout = "Triceps";
+                else if(id == rb_run.getId())
+                    workout = "Run";
 
                 b_workout=true;
                 dialog.cancel();
@@ -226,6 +209,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
 
         });
+    */
+
 
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
