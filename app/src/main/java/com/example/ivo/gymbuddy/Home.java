@@ -67,6 +67,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     WorkoutCounter wc;
     TimerSwitch t;
     Challenges c;
+    ChooseWorkout cw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         wc = new WorkoutCounter(this);
         t = new TimerSwitch(this);
         c = new Challenges(this);
+        cw = new ChooseWorkout(this);
 
         // Create views
         b_add_workout = (ImageButton) findViewById(R.id.LogAWorkout);
@@ -166,53 +168,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
      */
     private void createDialog()
     {
-        //AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-       // LayoutInflater inflater = Home.this.getLayoutInflater();
-        //ViewGroup parent = null;
-
-       // View view = inflater.inflate(R.layout.choose_workout, parent, false);
-       // builder.setView(view);
-
-      //  builder.setTitle("Choose your workout!");
-
-       // dialog = builder.create();
-
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.choose_workout);
-
-        /*b_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int id = rg.getCheckedRadioButtonId();
-
-                if(id == rb_legs.getId())
-                    workout = "Legs";
-                else if(id == rb_cycling.getId())
-                    workout = "Cycling";
-                else if(id == rb_shoulders.getId())
-                    workout = "Shoulders";
-                else if(id == rb_chest.getId())
-                    workout = "Chest";
-                else if(id == rb_back.getId())
-                    workout = "Back";
-                else if(id == rb_biceps.getId())
-                    workout = "Biceps";
-                else if(id == rb_triceps.getId())
-                    workout = "Triceps";
-                else if(id == rb_run.getId())
-                    workout = "Run";
-
-                b_workout=true;
-                dialog.cancel();
-                t.startTimer();
-            }
-
-        });
-    */
-
-
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+     /*  String workout = cw.showDialog();
+        b_workout=true;
+        //dialog.cancel();
+        t.startTimer();*/
     }
 }
