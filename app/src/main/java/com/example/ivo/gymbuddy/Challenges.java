@@ -63,7 +63,6 @@ public class Challenges {
 
         int dif = wd - td;
 
-        Log.d("ALLALALA", " " + td + " " + wd);
         if(dif == 1 || (dif == 6 && wd == 7)){
             // Change daily challenge
             nv = (NavigationView) activity.findViewById(R.id.navigation);
@@ -105,5 +104,9 @@ public class Challenges {
         editor.commit();
     }
 
+    protected void getDailyChallenge(){
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
+    }
 
 }
