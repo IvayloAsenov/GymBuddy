@@ -44,14 +44,14 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/ib_cycling"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/body_3" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/ib_chest"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -67,14 +67,14 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/ib_triceps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/body_2" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/ib_biceps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -90,7 +90,7 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/ib_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

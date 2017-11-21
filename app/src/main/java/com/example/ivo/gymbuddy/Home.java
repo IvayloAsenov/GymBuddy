@@ -51,10 +51,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
     int minutes = 0;
     int seconds = 0;
 
-    boolean b_workout = false; // Variable to start/end workout
-
-    //AlertDialog dialog; // Dialog that will pop up when starting workout
-
     String workout=""; // String that will hold the current workout
 
     int current_body = 0; // Variable used to cycle through body types
@@ -138,6 +134,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 ib_startWorkout.setVisibility(View.VISIBLE);
                 ib_startWorkout.setClickable(true);
                 String s_time = t.stopTimer();
+                workout = cw.getWorkout();
                 formatMessage(workout, s_time);
             }
         });
@@ -168,9 +165,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
      */
     private void createDialog()
     {
-     /*  String workout = cw.showDialog();
-        b_workout=true;
-        //dialog.cancel();
-        t.startTimer();*/
+        cw.showDialog(t);
     }
+
 }
