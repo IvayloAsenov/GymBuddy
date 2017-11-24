@@ -11,12 +11,13 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by Ivo on 11/15/2017.
  */
 
-public class Challenges {
+public class Challenges implements DailyChallenges{
 
     Activity activity;
     String today_day = ""; // Variable used to store today's date
@@ -24,9 +25,12 @@ public class Challenges {
     NavigationView nv;
     MenuItem mi;
 
+    Random rand;
+
     // Get Home's context
     Challenges(Activity a){
         activity = a;
+        setDailyChallenge();
         getDays();
     }
 
@@ -50,9 +54,8 @@ public class Challenges {
            // saveDate(today_day);
         }else{
             //Change daily challenge
-            nv = (NavigationView) activity.findViewById(R.id.navigation);
-            nv.getMenu().findItem(R.id.account).setTitle("CHANGE CHALLENGE!");
             saveDate(today_day, 0);
+            changeDailyChallenge();
         }
     }
 
@@ -104,9 +107,31 @@ public class Challenges {
         editor.commit();
     }
 
-    protected void getDailyChallenge(){
+
+    // Change daily challenge to the next daily challenge in DailyChallenge Interface
+    protected void changeDailyChallenge(){
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
-        String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
+        int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
+
+        int next_daily_challenge = stored_daily_challenge + 1;
+        if(next_daily_challenge >= len)
+            next_daily_challenge = 0;
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("saved_daily_challenge", next_daily_challenge);
+
+        nv = (NavigationView) activity.findViewById(R.id.navigation);
+        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
+    }
+
+    // Sets the daily challenge when app is ran
+    protected void setDailyChallenge(){
+
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 3);
+
+        nv = (NavigationView) activity.findViewById(R.id.navigation);
+        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[stored_daily_challenge]);
     }
 
 }

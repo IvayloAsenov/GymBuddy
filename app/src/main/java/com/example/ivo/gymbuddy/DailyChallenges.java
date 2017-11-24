@@ -6,12 +6,14 @@ package com.example.ivo.gymbuddy;
 
 public interface DailyChallenges {
 
-    final int[] daily_challenges = {R.string.daily_challenge_01,
+    int[] daily_challenges = {R.string.daily_challenge_01,
             R.string.daily_challenge_02,
             R.string.daily_challenge_03,
             R.string.daily_challenge_04,
             R.string.daily_challenge_05,
             R.string.daily_challenge_06
                                     };
+
+    int len = daily_challenges.length;
 
 }
