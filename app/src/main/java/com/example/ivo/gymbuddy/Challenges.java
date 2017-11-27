@@ -44,24 +44,36 @@ public class Challenges implements DailyChallenges{
         String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
         int weekly_date = sharedPref.getInt("saved_weekly_counter", 6);
 
-        verifyDailyDate(today_day, stored_daily_day);
+        verifyDailyDate(today_day, stored_daily_day, weekly_date);
     }
 
     // Check if it has been a day and changes the challenges if so
-    protected void verifyDailyDate(String today_day, String stored_daily_day){
+    protected void verifyDailyDate(String today_day, String stored_daily_day, int weekly_date){
         if(stored_daily_day.equals(today_day)) {
             // Keep challenge
-           // saveDate(today_day);
         }else{
             //Change daily challenge
             saveDate(today_day, 0);
             changeDailyChallenge();
+            verifyWeeklyDate(weekly_date);
         }
     }
 
     // Check if it has been a week and changes the challenges if so
-    protected void verifyWeeklyDate(String today_day, String stored_weekly_date){
+    protected void verifyWeeklyDate(int wd){
+        wd = wd - 1;
 
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        Toast.makeText(activity.getApplicationContext(), " " + wd, Toast.LENGTH_LONG).show();
+
+        if(wd > 0) {
+            editor.putInt("saved_weekly_counter", wd).commit();
+        }else{
+            editor.putInt("saved_weekly_counter", 6).commit();
+            changeWeeklyChallenge();
+        }
 
     }
 
@@ -72,14 +84,29 @@ public class Challenges implements DailyChallenges{
 
         if(w_d == 0){
             editor.putString("saved_daily_date", today_day).apply();
-        }else{
-            editor.putString("saved_weekly_date", today_day).apply();
         }
     }
 
 
     // Change daily challenge to the next daily challenge in DailyChallenge Interface
     protected void changeDailyChallenge(){
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
+
+        int next_daily_challenge = stored_daily_challenge + 1;
+
+        if(next_daily_challenge >= len)
+            next_daily_challenge = 0;
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("saved_daily_challenge", next_daily_challenge).apply();
+
+        nv = (NavigationView) activity.findViewById(R.id.navigation);
+        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
+    }
+
+    // Change weekly challenge to the next weekly challenge in WeeklyChallenge Interface
+    protected void changeWeeklyChallenge(){
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
 
