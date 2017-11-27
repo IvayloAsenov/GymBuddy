@@ -34,6 +34,7 @@ public class Challenges implements DailyChallenges{
         getDays();
     }
 
+    // Get current day
     protected void getDays(){
 
         Calendar sCalendar = Calendar.getInstance();
@@ -41,13 +42,12 @@ public class Challenges implements DailyChallenges{
 
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
         String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
-        String stored_weekly_day = sharedPref.getString("saved_weekly_date", today_day);
+        int weekly_date = sharedPref.getInt("saved_weekly_counter", 6);
 
-        Toast.makeText(activity.getApplicationContext(), "" + today_day + "" + stored_weekly_day, Toast.LENGTH_SHORT).show();
         verifyDailyDate(today_day, stored_daily_day);
-        verifyWeeklyDate(today_day, stored_weekly_day);
     }
 
+    // Check if it has been a day and changes the challenges if so
     protected void verifyDailyDate(String today_day, String stored_daily_day){
         if(stored_daily_day.equals(today_day)) {
             // Keep challenge
@@ -59,52 +59,22 @@ public class Challenges implements DailyChallenges{
         }
     }
 
+    // Check if it has been a week and changes the challenges if so
     protected void verifyWeeklyDate(String today_day, String stored_weekly_date){
 
-        int td = dayToNum(today_day);
-        int wd = dayToNum(stored_weekly_date);
 
-        int dif = wd - td;
-
-        if(dif == 1 || (dif == 6 && wd == 7)){
-            // Change daily challenge
-            nv = (NavigationView) activity.findViewById(R.id.navigation);
-            nv.getMenu().findItem(R.id.logout).setTitle("CHANGE WEEKLY CHALLENGE!");
-            saveDate(today_day, 1);
-        }else{
-            // Do nothing
-        }
     }
 
-    private int dayToNum(String day){
-        if(day.equals("Monday"))
-            return 1;
-        else if(day.equals("Tuesday"))
-            return 2;
-        else if(day.equals("Wednesday"))
-            return 3;
-        else if(day.equals("Thursday"))
-            return 4;
-        else if(day.equals("Friday"))
-            return 5;
-        else if(day.equals("Saturday"))
-            return 6;
-        else if(day.equals("Sunday"))
-            return 7;
-
-        return 1;
-    }
-
+    // Save the date to shared preference
     protected void saveDate(String today_day, int w_d){
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         if(w_d == 0){
-            editor.putString("saved_daily_date", today_day);
+            editor.putString("saved_daily_date", today_day).apply();
         }else{
-            editor.putString("saved_weekly_date", today_day);
+            editor.putString("saved_weekly_date", today_day).apply();
         }
-        editor.commit();
     }
 
 
@@ -114,11 +84,12 @@ public class Challenges implements DailyChallenges{
         int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
 
         int next_daily_challenge = stored_daily_challenge + 1;
+
         if(next_daily_challenge >= len)
             next_daily_challenge = 0;
 
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("saved_daily_challenge", next_daily_challenge);
+        editor.putInt("saved_daily_challenge", next_daily_challenge).apply();
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
         nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
@@ -128,7 +99,7 @@ public class Challenges implements DailyChallenges{
     protected void setDailyChallenge(){
 
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
-        int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 3);
+        int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
         nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[stored_daily_challenge]);
