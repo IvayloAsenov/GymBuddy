@@ -1,6 +1,8 @@
 Back end:
-- First time start activity (jon)
-- Every x workouts slim down person
+- Logic activity (john)
+- Rotate Weekly Challenges
+- Complete Daily Challenges
+- Complete Weekly Challenges
 
 Front end:
 - UI
