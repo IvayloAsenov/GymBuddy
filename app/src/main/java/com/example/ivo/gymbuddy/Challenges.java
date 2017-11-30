@@ -17,7 +17,7 @@ import java.util.Random;
  * Created by Ivo on 11/15/2017.
  */
 
-public class Challenges implements DailyChallenges{
+public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     Activity activity;
     String today_day = ""; // Variable used to store today's date
@@ -31,6 +31,7 @@ public class Challenges implements DailyChallenges{
     Challenges(Activity a){
         activity = a;
         setDailyChallenge();
+        setWeeklyChallenge();
         getDays();
     }
 
@@ -108,18 +109,18 @@ public class Challenges implements DailyChallenges{
     // Change weekly challenge to the next weekly challenge in WeeklyChallenge Interface
     protected void changeWeeklyChallenge(){
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
-        int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
+        int stored_weekly_challenge = sharedPref.getInt("saved_weekly_challenge", 0);
 
-        int next_daily_challenge = stored_daily_challenge + 1;
+        int next_weekly_challenge = stored_weekly_challenge + 1;
 
-        if(next_daily_challenge >= len)
-            next_daily_challenge = 0;
+        if(next_weekly_challenge >= wlen)
+            next_weekly_challenge = 0;
 
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("saved_daily_challenge", next_daily_challenge).apply();
+        editor.putInt("saved_weekly_challenge", next_weekly_challenge).apply();
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
-        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
+        nv.getMenu().findItem(R.id.account).setTitle(weekly_challenges[next_weekly_challenge]);
     }
 
     // Sets the daily challenge when app is ran
@@ -132,4 +133,12 @@ public class Challenges implements DailyChallenges{
         nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[stored_daily_challenge]);
     }
 
+    // Sets the weekly challenge when app is ran
+    protected void setWeeklyChallenge(){
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        int stored_weekly_challenge = sharedPref.getInt("saved_weekly_challenge", 0);
+
+        nv = (NavigationView) activity.findViewById(R.id.navigation);
+        nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[stored_weekly_challenge]);
+    }
 }
