@@ -15,5 +15,6 @@ Functionalities to come:
 - Ability to connect to Facebook
 - Ability to complete challenges
 - A more complex algorith for gaining/losing weight 
+- Ability to login and track progress
 
 Currently waiting on a UI design.
