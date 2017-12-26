@@ -143,8 +143,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 workout = cw.getWorkout();
                 formatMessage(workout, s_time);
 
+                int minutes = t.getMinutes();
                 // Verify if daily challenge is completed!
-                idc.checkCompletion(daily_challenge);
+                idc.checkCompletion(daily_challenge, minutes);
             }
         });
 

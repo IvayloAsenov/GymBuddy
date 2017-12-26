@@ -2,6 +2,7 @@ package com.example.ivo.gymbuddy;
 
 import android.app.Activity;
 import android.icu.text.IDNA;
+import android.widget.Toast;
 
 /**
  * Created by Ivo on 12/26/2017.
@@ -33,37 +34,43 @@ public class InformationDailyChallenges {
         activity = a;
     }
 
-    protected boolean checkCompletion(int challenge) {
+    protected boolean checkCompletion(int challenge, int minutes) {
         switch(challenge)
         {
-            case 1:
-                completed = challenge1();
+            case 0:
+                completed = challenge1(minutes);
                 break;
-            case 2:
+            case 1:
                 completed = challenge2();
                 break;
 
-            case 3:
+            case 2:
                 completed = challenge3();
                 break;
 
-            case 4:
+            case 3:
                 completed = challenge4();
                 break;
 
-            case 5:
+            case 4:
                 completed = challenge5();
                 break;
 
-            case 6:
+            case 5:
                 completed = challenge6();
                 break;
         }
 
+        if(completed)
+            Toast.makeText(activity, "CHALLENGE COMPLETED!", Toast.LENGTH_SHORT).show();
+
         return completed;
     }
 
-    private boolean challenge1(){
+    /* Verify if time workout > 30 */
+    private boolean challenge1(int minutes){
+        if(minutes >= 30)
+            return true;
         return false;
     }
 

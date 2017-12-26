@@ -56,6 +56,10 @@ class TimerSwitch {
         return time;
     }
 
+    protected int getMinutes(){
+        return minutes;
+    }
+
     protected void pauseTimer(){
         if(!paused){
             TimeBuff += MillisecondTime;
