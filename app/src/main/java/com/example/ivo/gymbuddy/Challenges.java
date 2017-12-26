@@ -1,6 +1,7 @@
 package com.example.ivo.gymbuddy;
 
 import android.app.Activity;
+import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
@@ -27,6 +28,8 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     Random rand;
 
+    SharedPreferences sharedPref;
+
     // Get Home's context
     Challenges(Activity a){
         activity = a;
@@ -41,7 +44,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
         Calendar sCalendar = Calendar.getInstance();
         String today_day = sCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
         String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
         int weekly_date = sharedPref.getInt("saved_weekly_counter", 6);
 
@@ -64,7 +67,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
     protected void verifyWeeklyDate(int wd){
         wd = wd - 1;
 
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         Toast.makeText(activity.getApplicationContext(), " " + wd, Toast.LENGTH_LONG).show();
@@ -80,7 +83,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     // Save the date to shared preference
     protected void saveDate(String today_day, int w_d){
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges_dates", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         if(w_d == 0){
@@ -91,7 +94,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     // Change daily challenge to the next daily challenge in DailyChallenge Interface
     protected void changeDailyChallenge(){
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
 
         int next_daily_challenge = stored_daily_challenge + 1;
@@ -108,7 +111,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     // Change weekly challenge to the next weekly challenge in WeeklyChallenge Interface
     protected void changeWeeklyChallenge(){
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         int stored_weekly_challenge = sharedPref.getInt("saved_weekly_challenge", 0);
 
         int next_weekly_challenge = stored_weekly_challenge + 1;
@@ -125,8 +128,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     // Sets the daily challenge when app is ran
     protected void setDailyChallenge(){
-
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
@@ -135,10 +137,17 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
     // Sets the weekly challenge when app is ran
     protected void setWeeklyChallenge(){
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         int stored_weekly_challenge = sharedPref.getInt("saved_weekly_challenge", 0);
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
         nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[stored_weekly_challenge]);
     }
+
+    // Gets the daily challenge when app is ran
+    protected int getDailyChallenge(){
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
+        return sharedPref.getInt("saved_daily_challenge", 0);
+    }
+
 }

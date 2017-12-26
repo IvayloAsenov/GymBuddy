@@ -46,7 +46,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
     ImageButton ib_pauseWorkout;
     ImageButton ib_stopWorkout;
 
-
     // Minutes and seconds for the timer
     int minutes = 0;
     int seconds = 0;
@@ -54,6 +53,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
     String workout=""; // String that will hold the current workout
 
     int current_body = 0; // Variable used to cycle through body types
+
+    int daily_challenge; // Variable used to store challenge
 
     private int workout_counter; // Public variable used to count workouts
 
@@ -64,6 +65,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     TimerSwitch t;
     Challenges c;
     ChooseWorkout cw;
+    InformationDailyChallenges idc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,10 @@ public class Home extends AppCompatActivity implements BodyTypes{
         t = new TimerSwitch(this);
         c = new Challenges(this);
         cw = new ChooseWorkout(this);
+        idc = new InformationDailyChallenges(this);
+
+        // Get daily challenge
+        daily_challenge = c.getDailyChallenge();
 
         // Create views
         b_add_workout = (ImageButton) findViewById(R.id.LogAWorkout);
@@ -136,6 +142,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 String s_time = t.stopTimer();
                 workout = cw.getWorkout();
                 formatMessage(workout, s_time);
+
+                // Verify if daily challenge is completed!
+                idc.checkCompletion(daily_challenge);
             }
         });
 
@@ -146,6 +155,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
             }
         });
     }
+
     /*
         Formats the string that is going to be saved to the file
      */
