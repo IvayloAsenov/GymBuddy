@@ -34,7 +34,7 @@ public class InformationDailyChallenges {
         activity = a;
     }
 
-    protected boolean checkCompletion(int challenge, int minutes) {
+    protected boolean checkCompletion(int challenge, int minutes, String workout) {
         switch(challenge)
         {
             case 0:
@@ -45,19 +45,19 @@ public class InformationDailyChallenges {
                 break;
 
             case 2:
-                completed = challenge3();
+                completed = challenge3(workout);
                 break;
 
             case 3:
-                completed = challenge4();
+                completed = challenge4(workout);
                 break;
 
             case 4:
-                completed = challenge5();
+                completed = challenge5(workout);
                 break;
 
             case 5:
-                completed = challenge6();
+                completed = challenge6(workout);
                 break;
         }
 
@@ -78,19 +78,27 @@ public class InformationDailyChallenges {
         return false;
     }
 
-    private boolean challenge3(){
+    private boolean challenge3(String workout){
+        if(workout.equals("Legs"))
+            return true;
         return false;
     }
 
-    private boolean challenge4(){
+    private boolean challenge4(String workout){
+        if(workout.equals("Chest"))
+            return true;
         return false;
     }
 
-    private boolean challenge5(){
+    private boolean challenge5(String workout){
+        if(workout.equals("Triceps"))
+            return true;
         return false;
     }
 
-    private boolean challenge6(){
+    private boolean challenge6(String workout){
+        if(workout.equals("Back"))
+            return true;
         return false;
     }
 }
