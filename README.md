@@ -9,11 +9,12 @@ Functionalities of the application so far:
 - Ability to start/stop a workout
 - Timer when workout is started
 - The more you workout the better your gym buddy will look
+- Ability to complete daily challenges
 
 Functionalities to come:
 - Ability to choose male/female buddy
 - Ability to connect to Facebook
-- Ability to complete challenges
+- Ability to complete weekly challenges
 - A more complex algorith for gaining/losing weight 
 - Ability to login and track progress
 
