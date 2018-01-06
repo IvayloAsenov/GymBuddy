@@ -1,8 +1,13 @@
 package com.example.ivo.gymbuddy;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.text.IDNA;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by Ivo on 12/26/2017.
@@ -16,7 +21,7 @@ import android.widget.Toast;
     To do:
 
     dc1: timeWorkout > 30
-    dc2: todayWorkout is different than yesterdayWorkout
+    dc2: workout twice today
     dc3: todayWorkout is legs
     dc4: todayWorkout is chest
     dc5: todayWorkout is triceps
@@ -29,12 +34,12 @@ public class InformationDailyChallenges {
 
     boolean completed;
 
-
     InformationDailyChallenges(Activity a){
         activity = a;
     }
 
     protected boolean checkCompletion(int challenge, int minutes, String workout) {
+
         switch(challenge)
         {
             case 0:
@@ -74,28 +79,63 @@ public class InformationDailyChallenges {
         return false;
     }
 
+
     private boolean challenge2(){
+
+        // Get today's day
+        Calendar sCalendar = Calendar.getInstance();
+        String today_day = sCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
+        int stored_workout_counter = sharedPref.getInt("saved_daily_workout_counter", -1);
+
+        // First workout of the day
+        if(stored_workout_counter == -1 && today_day.equals(stored_daily_day)) {
+            editor.putInt("saved_daily_workout_counter", 1).commit();
+        }
+
+        // Second workout of the day
+        else if(stored_workout_counter == 1 && today_day.equals(stored_daily_day))
+        {
+            editor.putInt("saved_daily_workout_counter", -1).commit();
+            return true;
+        }
+
+        // Different day
+        else
+        {
+            editor.putString("saved_daily_date", today_day).commit();
+            editor.putInt("saved_daily_workout_counter", -1).commit();
+        }
+
         return false;
     }
 
+    /* Verify if workout is Legs */
     private boolean challenge3(String workout){
         if(workout.equals("Legs"))
             return true;
         return false;
     }
 
+    /* Verify if workout is Chest */
     private boolean challenge4(String workout){
         if(workout.equals("Chest"))
             return true;
         return false;
     }
 
+    /* Verify if workout is Triceps */
     private boolean challenge5(String workout){
         if(workout.equals("Triceps"))
             return true;
         return false;
     }
 
+    /* Verify if workout is Back */
     private boolean challenge6(String workout){
         if(workout.equals("Back"))
             return true;
