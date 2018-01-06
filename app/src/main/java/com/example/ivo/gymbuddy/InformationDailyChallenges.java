@@ -34,17 +34,28 @@ public class InformationDailyChallenges {
 
     boolean completed;
 
+    int saved_completed = 0; // 0: not completed 1: completed
+
+
     InformationDailyChallenges(Activity a){
         activity = a;
     }
 
     protected boolean checkCompletion(int challenge, int minutes, String workout) {
 
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
+        saved_completed = sharedPref.getInt("saved_completed", 0);
+
+        // If completed == 1 just return false, cannot complete twice
+        if(saved_completed == 1)
+            return false;
+
         switch(challenge)
         {
             case 0:
                 completed = challenge1(minutes);
                 break;
+
             case 1:
                 completed = challenge2();
                 break;
@@ -66,9 +77,11 @@ public class InformationDailyChallenges {
                 break;
         }
 
-        if(completed)
+        if(completed) {
             Toast.makeText(activity, "CHALLENGE COMPLETED!", Toast.LENGTH_SHORT).show();
-
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("saved_completed", 1).commit(); // Save as daily challenge completed
+        }
         return completed;
     }
 

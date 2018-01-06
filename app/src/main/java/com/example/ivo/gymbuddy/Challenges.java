@@ -107,6 +107,12 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
         nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
+
+        // Reset the daily completed status
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        editor.putInt("saved_completed", 0).commit();
     }
 
     // Change weekly challenge to the next weekly challenge in WeeklyChallenge Interface
@@ -123,7 +129,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
         editor.putInt("saved_weekly_challenge", next_weekly_challenge).apply();
 
         nv = (NavigationView) activity.findViewById(R.id.navigation);
-        nv.getMenu().findItem(R.id.account).setTitle(weekly_challenges[next_weekly_challenge]);
+        nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[next_weekly_challenge]);
     }
 
     // Sets the daily challenge when app is ran
