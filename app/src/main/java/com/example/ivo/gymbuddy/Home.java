@@ -40,6 +40,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
     ImageButton b_viewWorkouts;
 
     ImageView iv_body_type;
+
+    TextView tv_scoreCounter;
     TextView tv_timer;
 
     ImageButton ib_startWorkout;
@@ -66,6 +68,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     Challenges c;
     ChooseWorkout cw;
     InformationDailyChallenges idc;
+    Score s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         c = new Challenges(this);
         cw = new ChooseWorkout(this);
         idc = new InformationDailyChallenges(this);
+        s = new Score(this);
 
         // Get daily challenge
         daily_challenge = c.getDailyChallenge();
@@ -89,6 +93,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         b_viewWorkouts = (ImageButton) findViewById(R.id.b_viewWorkouts);
 
         tv_timer = (TextView) findViewById(R.id.tv_timer);
+        tv_scoreCounter = (TextView) findViewById(R.id.tv_scoreCounter);
+
         iv_body_type = (ImageView) findViewById(R.id.iv_body_type);
 
         current_body = bt.readBType();
@@ -97,6 +103,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
         ib_stopWorkout = (ImageButton) findViewById(R.id.ib_stopWorkout);
         ib_pauseWorkout = (ImageButton) findViewById(R.id.ib_pauseWorkout);
+
+
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -144,8 +152,12 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 formatMessage(workout, s_time);
 
                 int minutes = t.getMinutes();
-                // Verify if daily challenge is completed!
-                idc.checkCompletion(daily_challenge, minutes, workout);
+
+                // If challenge is completed, then add score
+                if (idc.checkCompletion(daily_challenge, minutes, workout))
+                {
+                    //int currentScore = Integer.parseInt(tv_scoreCounter.getText().toString());
+                }
             }
         });
 

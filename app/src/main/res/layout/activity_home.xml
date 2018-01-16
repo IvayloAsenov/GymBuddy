@@ -101,14 +101,30 @@
                 android:background="@null"
                 app:srcCompat="@drawable/b_play" />
 
-            <ImageButton
-                android:id="@+id/ib_stopWorkout"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
-                android:clickable="false"
-                android:visibility="invisible"
-                app:srcCompat="@android:drawable/star_on" />
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_scoreCounter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="0"
+                    android:textSize="32dp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:gravity="center"/>
+
+                <ImageButton
+                    android:id="@+id/ib_stopWorkout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:clickable="false"
+                    android:visibility="invisible"
+                    app:srcCompat="@android:drawable/star_on" />
+            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>
