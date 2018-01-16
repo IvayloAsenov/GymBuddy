@@ -93,7 +93,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
         b_viewWorkouts = (ImageButton) findViewById(R.id.b_viewWorkouts);
 
         tv_timer = (TextView) findViewById(R.id.tv_timer);
+
         tv_scoreCounter = (TextView) findViewById(R.id.tv_scoreCounter);
+        tv_scoreCounter.setText(s.getCurrentScore());
 
         iv_body_type = (ImageView) findViewById(R.id.iv_body_type);
 
@@ -156,7 +158,11 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 // If challenge is completed, then add score
                 if (idc.checkCompletion(daily_challenge, minutes, workout))
                 {
-                    //int currentScore = Integer.parseInt(tv_scoreCounter.getText().toString());
+                    int currentScore = Integer.parseInt(s.getCurrentScore());
+                    currentScore += 1;
+
+                    tv_scoreCounter.setText(Integer.toString(currentScore));
+                    s.setCurrentScore(Integer.toString(currentScore));
                 }
             }
         });

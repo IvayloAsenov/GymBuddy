@@ -19,11 +19,12 @@ public class Score {
     }
 
     public String getCurrentScore(){
-
-        return "test";
+        int currentScore = sharedPref.getInt("score", 0);
+        return Integer.toString(currentScore);
     }
 
     public void setCurrentScore(String score){
-
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("score", Integer.parseInt(score)).commit(); // Save as daily challenge completed
     }
 }
