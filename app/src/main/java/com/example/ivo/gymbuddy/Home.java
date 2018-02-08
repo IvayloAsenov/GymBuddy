@@ -57,6 +57,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
     int current_body = 0; // Variable used to cycle through body types
 
     int daily_challenge; // Variable used to store challenge
+    int weekly_challenge;
+
+    int currentScore;
 
     private int workout_counter; // Public variable used to count workouts
 
@@ -68,6 +71,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     Challenges c;
     ChooseWorkout cw;
     InformationDailyChallenges idc;
+    InformationWeeklyChallenges iwc;
     Score s;
 
     @Override
@@ -83,10 +87,12 @@ public class Home extends AppCompatActivity implements BodyTypes{
         c = new Challenges(this);
         cw = new ChooseWorkout(this);
         idc = new InformationDailyChallenges(this);
+        iwc = new InformationWeeklyChallenges(this);
         s = new Score(this);
 
         // Get daily challenge
         daily_challenge = c.getDailyChallenge();
+        weekly_challenge = c.getWeeklyChallenge();
 
         // Create views
         b_add_workout = (ImageButton) findViewById(R.id.LogAWorkout);
@@ -158,8 +164,17 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 // If challenge is completed, then add score
                 if (idc.checkCompletion(daily_challenge, minutes, workout))
                 {
-                    int currentScore = Integer.parseInt(s.getCurrentScore());
+                    currentScore = Integer.parseInt(s.getCurrentScore());
                     currentScore += 1;
+
+                    tv_scoreCounter.setText(Integer.toString(currentScore));
+                    s.setCurrentScore(Integer.toString(currentScore));
+                }
+
+                if (iwc.checkCompletion(weekly_challenge, minutes, workout))
+                {
+                    currentScore = Integer.parseInt(s.getCurrentScore());
+                    currentScore += 5;
 
                     tv_scoreCounter.setText(Integer.toString(currentScore));
                     s.setCurrentScore(Integer.toString(currentScore));

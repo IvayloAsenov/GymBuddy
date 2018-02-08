@@ -8,7 +8,6 @@ public interface WeeklyChallenges {
 
     int[] weekly_challenges = {R.string.weekly_challenge_01,
             R.string.weekly_challenge_02,
-            R.string.weekly_challenge_03
     };
 
     int wlen = weekly_challenges.length;

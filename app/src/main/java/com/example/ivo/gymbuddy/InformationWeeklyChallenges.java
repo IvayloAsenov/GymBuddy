@@ -14,20 +14,18 @@ import java.util.Locale;
 
 
 /*
-    Class used to save information in order to see if daily
+    Class used to save information in order to see if weekly
     challenge was completed or not!
 
     To do:
 
-    dc1: timeWorkout > 30
-    dc2: workout twice today
-    dc3: todayWorkout is legs
-    dc4: todayWorkout is chest
-    dc5: todayWorkout is triceps
-    dc6: todayWorkout is back
+    dc1: # of workouts > 4
+    dc2: minutes exercised > 240
+
+    VICE VERSA
  */
 
-public class InformationDailyChallenges {
+public class InformationWeeklyChallenges {
 
     Activity activity;
 
@@ -35,14 +33,16 @@ public class InformationDailyChallenges {
 
     int saved_completed = 0; // 0: not completed 1: completed
 
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
-    InformationDailyChallenges(Activity a){
+    InformationWeeklyChallenges(Activity a){
         activity = a;
     }
 
     protected boolean checkCompletion(int challenge, int minutes, String workout) {
 
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_weekly_challenges", Context.MODE_PRIVATE);
         saved_completed = sharedPref.getInt("saved_completed", 0);
 
         // If completed == 1 just return false, cannot complete twice
@@ -58,37 +58,29 @@ public class InformationDailyChallenges {
             case 1:
                 completed = challenge2();
                 break;
-
-            case 2:
-                completed = challenge3(workout);
-                break;
-
-            case 3:
-                completed = challenge4(workout);
-                break;
-
-            case 4:
-                completed = challenge5(workout);
-                break;
-
-            case 5:
-                completed = challenge6(workout);
-                break;
         }
 
         if(completed) {
             Toast.makeText(activity, "CHALLENGE COMPLETED!", Toast.LENGTH_SHORT).show();
-            SharedPreferences.Editor editor = sharedPref.edit();
+            editor = sharedPref.edit();
             editor.putInt("saved_completed", 1).commit(); // Save as daily challenge completed
         }
         return completed;
     }
 
-    /* Verify if time workout > 30 */
+    /* Verify if time workout > 240 */
     private boolean challenge1(int minutes){
-        if(minutes >= 30)
+
+        int timeWorkout = sharedPref.getInt("timeWorkout", 0);
+
+        if(timeWorkout + minutes >= 240){
+            editor.putInt("timeWorkout", 0);
             return true;
-        return false;
+        }
+        else{
+            editor.putInt("timeWorkout", timeWorkout + minutes);
+            return false;
+        }
     }
 
 
@@ -123,34 +115,6 @@ public class InformationDailyChallenges {
             editor.putInt("saved_daily_workout_counter", -1).commit();
         }
 
-        return false;
-    }
-
-    /* Verify if workout is Legs */
-    private boolean challenge3(String workout){
-        if(workout.equals("Legs"))
-            return true;
-        return false;
-    }
-
-    /* Verify if workout is Chest */
-    private boolean challenge4(String workout){
-        if(workout.equals("Chest"))
-            return true;
-        return false;
-    }
-
-    /* Verify if workout is Triceps */
-    private boolean challenge5(String workout){
-        if(workout.equals("Triceps"))
-            return true;
-        return false;
-    }
-
-    /* Verify if workout is Back */
-    private boolean challenge6(String workout){
-        if(workout.equals("Back"))
-            return true;
         return false;
     }
 }
