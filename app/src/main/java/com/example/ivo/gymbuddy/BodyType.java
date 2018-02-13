@@ -1,3 +1,7 @@
+// File Name: Home.java
+// Developers: Ivaylo Asenov
+// Purpose: Cycles between body types
+
 package com.example.ivo.gymbuddy;
 
 import android.app.Activity;

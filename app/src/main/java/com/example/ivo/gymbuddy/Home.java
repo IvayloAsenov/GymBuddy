@@ -1,32 +1,21 @@
+// File Name: Home.java
+// Developers: Ivaylo Asenov
+// Purpose: Takes care of the home screen and links all the classes together
+
 package com.example.ivo.gymbuddy;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.ivo.gymbuddy.ChallengePackage.Challenges;
+import com.example.ivo.gymbuddy.ChallengePackage.InformationDailyChallenges;
+import com.example.ivo.gymbuddy.ChallengePackage.InformationWeeklyChallenges;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

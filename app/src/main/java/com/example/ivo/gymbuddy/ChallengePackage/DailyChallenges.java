@@ -1,4 +1,6 @@
-package com.example.ivo.gymbuddy;
+package com.example.ivo.gymbuddy.ChallengePackage;
+
+import com.example.ivo.gymbuddy.R;
 
 /**
  * Created by Ivo on 11/20/2017.

@@ -1,4 +1,15 @@
-package com.example.ivo.gymbuddy;
+// File Name: Home.java
+// Developers: Ivaylo Asenov
+// Purpose: Used to save information in order to see if daily
+//          challenge was completed or not
+//            dc1: timeWorkout > 30
+//            dc2: workout twice today
+//            dc3: todayWorkout is legs
+//            dc4: todayWorkout is chest
+//            dc5: todayWorkout is triceps
+//            dc6: todayWorkout is back
+
+package com.example.ivo.gymbuddy.ChallengePackage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,25 +18,6 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
-
-/**
- * Created by Ivo on 12/26/2017.
- */
-
-
-/*
-    Class used to save information in order to see if daily
-    challenge was completed or not!
-
-    To do:
-
-    dc1: timeWorkout > 30
-    dc2: workout twice today
-    dc3: todayWorkout is legs
-    dc4: todayWorkout is chest
-    dc5: todayWorkout is triceps
-    dc6: todayWorkout is back
- */
 
 public class InformationDailyChallenges {
 
@@ -36,11 +28,11 @@ public class InformationDailyChallenges {
     int saved_completed = 0; // 0: not completed 1: completed
 
 
-    InformationDailyChallenges(Activity a){
+    public InformationDailyChallenges(Activity a){
         activity = a;
     }
 
-    protected boolean checkCompletion(int challenge, int minutes, String workout) {
+    public boolean checkCompletion(int challenge, int minutes, String workout) {
 
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
         saved_completed = sharedPref.getInt("saved_completed", 0);

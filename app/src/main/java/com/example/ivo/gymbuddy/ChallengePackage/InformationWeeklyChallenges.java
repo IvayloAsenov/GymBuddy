@@ -1,27 +1,19 @@
-package com.example.ivo.gymbuddy;
+// File Name: Home.java
+// Developers: Ivaylo Asenov
+// Purpose: Used to save information in order to see if weekly
+//          challenge was completed or not
+//             dc1: minutes exercised > 240
+//             dc2: # workouts > 4
+
+package com.example.ivo.gymbuddy.ChallengePackage;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.Locale;
-
 /**
  * Created by Ivo on 12/26/2017.
- */
-
-
-/*
-    Class used to save information in order to see if weekly
-    challenge was completed or not!
-
-    To do:
-
-    dc1: minutes exercised > 240
-    dc2: # workouts > 4
-
  */
 
 public class InformationWeeklyChallenges {
@@ -35,13 +27,13 @@ public class InformationWeeklyChallenges {
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-    InformationWeeklyChallenges(Activity a){
+    public InformationWeeklyChallenges(Activity a){
         activity = a;
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_weekly_challenges", Context.MODE_PRIVATE);
         saved_completed = sharedPref.getInt("saved_completed", 0);
     }
 
-    protected boolean checkCompletion(int challenge, int minutes, String workout) {
+    public boolean checkCompletion(int challenge, int minutes, String workout) {
 
         // If completed == 1 just return false, cannot complete twice
         if(saved_completed == 1)

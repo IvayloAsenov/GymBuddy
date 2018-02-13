@@ -1,14 +1,17 @@
-package com.example.ivo.gymbuddy;
+// File Name: Challenges.java
+// Developers: Ivaylo Asenov
+// Purpose: Cycles between challenges daily and weekly
+
+package com.example.ivo.gymbuddy.ChallengePackage;
 
 import android.app.Activity;
-import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.ivo.gymbuddy.R;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -18,7 +21,7 @@ import java.util.Random;
  * Created by Ivo on 11/15/2017.
  */
 
-public class Challenges implements DailyChallenges, WeeklyChallenges{
+public class Challenges implements DailyChallenges, WeeklyChallenges {
 
     Activity activity;
     String today_day = ""; // Variable used to store today's date
@@ -31,7 +34,7 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
     SharedPreferences sharedPref;
 
     // Get Home's context
-    Challenges(Activity a){
+    public Challenges(Activity a){
         activity = a;
         setDailyChallenge();
         setWeeklyChallenge();
@@ -160,13 +163,13 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
     }
 
     // Gets the daily challenge when app is ran
-    protected int getDailyChallenge(){
+    public int getDailyChallenge(){
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         return sharedPref.getInt("saved_daily_challenge", 0);
     }
 
     // Gets the weekly challenge when app is ran
-    protected int getWeeklyChallenge(){
+    public int getWeeklyChallenge(){
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         return sharedPref.getInt("saved_weekly_challenge", 0);
     }
