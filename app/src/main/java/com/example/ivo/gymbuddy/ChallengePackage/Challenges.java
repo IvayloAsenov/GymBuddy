@@ -19,6 +19,7 @@ import java.util.Random;
 
 /**
  * Created by Ivo on 11/15/2017.
+ * test
  */
 
 public class Challenges implements DailyChallenges, WeeklyChallenges {
