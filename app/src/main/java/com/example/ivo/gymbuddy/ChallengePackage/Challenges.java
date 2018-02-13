@@ -19,7 +19,7 @@ import java.util.Random;
 
 /**
  * Created by Ivo on 11/15/2017.
- * Added comments + weekly challenge 2 (problem with pushes!)
+ * Added comments + weekly challenge 2 (problem with pushes!).
  */
 
 public class Challenges implements DailyChallenges, WeeklyChallenges {
