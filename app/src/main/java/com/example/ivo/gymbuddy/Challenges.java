@@ -127,6 +127,13 @@ public class Challenges implements DailyChallenges, WeeklyChallenges{
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("saved_weekly_challenge", next_weekly_challenge).apply();
 
+        /* Reset the weekly challenge counter */
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_weekly_challenges", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        editor.putInt("timeWorkout", 0).commit();
+        editor.putInt("numWorkouts", 0).commit();
+
         nv = (NavigationView) activity.findViewById(R.id.navigation);
         nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[next_weekly_challenge]);
     }

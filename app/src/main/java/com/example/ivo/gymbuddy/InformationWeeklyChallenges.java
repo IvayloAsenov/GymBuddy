@@ -19,10 +19,9 @@ import java.util.Locale;
 
     To do:
 
-    dc1: # of workouts > 4
-    dc2: minutes exercised > 240
+    dc1: minutes exercised > 240
+    dc2: # workouts > 4
 
-    VICE VERSA
  */
 
 public class InformationWeeklyChallenges {
@@ -38,12 +37,11 @@ public class InformationWeeklyChallenges {
 
     InformationWeeklyChallenges(Activity a){
         activity = a;
+        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_weekly_challenges", Context.MODE_PRIVATE);
+        saved_completed = sharedPref.getInt("saved_completed", 0);
     }
 
     protected boolean checkCompletion(int challenge, int minutes, String workout) {
-
-        sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_weekly_challenges", Context.MODE_PRIVATE);
-        saved_completed = sharedPref.getInt("saved_completed", 0);
 
         // If completed == 1 just return false, cannot complete twice
         if(saved_completed == 1)
@@ -74,47 +72,26 @@ public class InformationWeeklyChallenges {
         int timeWorkout = sharedPref.getInt("timeWorkout", 0);
 
         if(timeWorkout + minutes >= 240){
-            editor.putInt("timeWorkout", 0);
+            editor.putInt("timeWorkout", 0).commit();
             return true;
         }
         else{
-            editor.putInt("timeWorkout", timeWorkout + minutes);
+            editor.putInt("timeWorkout", timeWorkout + minutes).commit();
             return false;
         }
     }
 
-
     private boolean challenge2(){
 
-        // Get today's day
-        Calendar sCalendar = Calendar.getInstance();
-        String today_day = sCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        int numWorkouts = sharedPref.getInt("numWorkouts", 0);
+        numWorkouts ++;
 
-        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-
-        String stored_daily_day = sharedPref.getString("saved_daily_date", today_day);
-        int stored_workout_counter = sharedPref.getInt("saved_daily_workout_counter", -1);
-
-        // First workout of the day
-        if(stored_workout_counter == -1 && today_day.equals(stored_daily_day)) {
-            editor.putInt("saved_daily_workout_counter", 1).commit();
-        }
-
-        // Second workout of the day
-        else if(stored_workout_counter == 1 && today_day.equals(stored_daily_day))
-        {
-            editor.putInt("saved_daily_workout_counter", -1).commit();
+        if(numWorkouts >= 4){
+            editor.putInt("numWorkouts", 0).commit();
             return true;
+        }else{
+            editor.putInt("numWorkouts", numWorkouts).commit();
+            return false;
         }
-
-        // Different day
-        else
-        {
-            editor.putString("saved_daily_date", today_day).commit();
-            editor.putInt("saved_daily_workout_counter", -1).commit();
-        }
-
-        return false;
     }
 }
