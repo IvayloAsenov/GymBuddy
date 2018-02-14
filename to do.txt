@@ -1,8 +1,7 @@
+Pushed using Greenivo account
+
 Back end:
 - Logic activity (john)
-- Rotate Weekly Challenges
-- Complete Daily Challenges
-- Complete Weekly Challenges
 
 Front end:
 - UI
