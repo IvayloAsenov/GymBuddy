@@ -20,7 +20,7 @@ import java.util.Random;
 /**
  * Created by Ivo on 11/15/2017.
  * Added comments + weekly challenge 2 (problem with pushes!).
- * Test push 7
+ * Final test push to merge accounts
  */
 
 public class Challenges implements DailyChallenges, WeeklyChallenges {
