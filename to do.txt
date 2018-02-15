@@ -1,9 +1,14 @@
-Pushed using Greenivo account
+TO DO
 
-Back end:
-- Logic activity (john)
-
-Front end:
-- UI
-- More images
-- Animations
+Important
+---------
+- Shop: being able to purchase different gyms with the money 
+        from challenges
+- New challenges screen: change the current design of the challenges
+                         screen. Maybe add another Activity
+                         
+Less important
+--------------
+- UI/Designs 
+- Comments 
+- Fix bugs
