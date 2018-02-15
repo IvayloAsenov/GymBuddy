@@ -27,8 +27,8 @@
         <activity
             android:name=".SeeWorkouts"
             android:label="@string/title_activity_see_workouts"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-            
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ShopScreen"></activity>
     </application>
 
 </manifest>

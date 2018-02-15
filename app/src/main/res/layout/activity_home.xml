@@ -104,26 +104,45 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_weight="1.2">
 
                 <TextView
                     android:id="@+id/tv_scoreCounter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="42dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
+                    android:gravity="center"
                     android:text="0"
-                    android:textSize="32dp"
                     android:textColor="@android:color/holo_green_dark"
-                    android:gravity="center"/>
+                    android:textSize="32dp" />
 
                 <ImageButton
                     android:id="@+id/ib_stopWorkout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1.2"
                     android:clickable="false"
                     android:visibility="invisible"
                     app:srcCompat="@android:drawable/star_on" />
+
+                <ImageButton
+                    android:id="@+id/b_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/b_shop"
+                    android:layout_weight = "1.2"/>
             </RelativeLayout>
         </LinearLayout>
 

@@ -30,6 +30,7 @@ public class InformationWeeklyChallenges {
     public InformationWeeklyChallenges(Activity a){
         activity = a;
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_weekly_challenges", Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
         saved_completed = sharedPref.getInt("saved_completed", 0);
     }
 
@@ -52,7 +53,6 @@ public class InformationWeeklyChallenges {
 
         if(completed) {
             Toast.makeText(activity, "CHALLENGE COMPLETED!", Toast.LENGTH_SHORT).show();
-            editor = sharedPref.edit();
             editor.putInt("saved_completed", 1).commit(); // Save as daily challenge completed
         }
         return completed;

@@ -162,11 +162,11 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
                 if (iwc.checkCompletion(weekly_challenge, minutes, workout))
                 {
-                    currentScore = Integer.parseInt(s.getCurrentScore());
+                    /*currentScore = Integer.parseInt(s.getCurrentScore());
                     currentScore += 5;
 
                     tv_scoreCounter.setText(Integer.toString(currentScore));
-                    s.setCurrentScore(Integer.toString(currentScore));
+                    s.setCurrentScore(Integer.toString(currentScore));*/
                 }
             }
         });
