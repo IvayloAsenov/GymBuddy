@@ -38,6 +38,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
     ImageButton ib_pauseWorkout;
     ImageButton ib_stopWorkout;
 
+    int money=0;
+
     // Minutes and seconds for the timer
     int minutes = 0;
     int seconds = 0;
@@ -103,6 +105,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_pauseWorkout = (ImageButton) findViewById(R.id.ib_pauseWorkout);
 
         ib_shop = (ImageButton) findViewById(R.id.ib_shop);
+
+        // Update money
+        money = getIntent().getIntExtra("MONEY", Integer.parseInt(tv_scoreCounter.getText().toString()));
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +188,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ShopScreen.class);
+                //money = Integer.parseInt(tv_scoreCounter.getText().toString());
+                money = 50;
+                intent.putExtra("MONEY", money);
                 startActivity(intent);
             }
         });
