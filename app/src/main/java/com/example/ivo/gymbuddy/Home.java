@@ -27,6 +27,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
     ImageButton b_add_workout;
     ImageButton b_viewWorkouts;
+    ImageButton ib_shop;
 
     ImageView iv_body_type;
 
@@ -101,7 +102,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_stopWorkout = (ImageButton) findViewById(R.id.ib_stopWorkout);
         ib_pauseWorkout = (ImageButton) findViewById(R.id.ib_pauseWorkout);
 
-
+        ib_shop = (ImageButton) findViewById(R.id.ib_shop);
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -162,11 +163,11 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
                 if (iwc.checkCompletion(weekly_challenge, minutes, workout))
                 {
-                    /*currentScore = Integer.parseInt(s.getCurrentScore());
+                    currentScore = Integer.parseInt(s.getCurrentScore());
                     currentScore += 5;
 
                     tv_scoreCounter.setText(Integer.toString(currentScore));
-                    s.setCurrentScore(Integer.toString(currentScore));*/
+                    s.setCurrentScore(Integer.toString(currentScore));
                 }
             }
         });
@@ -175,6 +176,14 @@ public class Home extends AppCompatActivity implements BodyTypes{
             @Override
             public void onClick(View v) {
                 t.pauseTimer();
+            }
+        });
+
+        ib_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ShopScreen.class);
+                startActivity(intent);
             }
         });
     }
