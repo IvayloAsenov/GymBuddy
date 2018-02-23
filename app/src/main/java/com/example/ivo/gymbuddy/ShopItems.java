@@ -14,24 +14,24 @@ class ShopItems {
         activity = a;
     }
 
-    protected boolean buyGym(int position, int money){
+    protected int buyGym(int position, int money){
 
         switch (position){
             case 0:
                 if(money >= 10)
-                    return true;
-                return false;
+                    return 10;
+                return -1;
 
             case 1:
                 if(money >= 50)
-                    return true;
-                return false;
+                    return 50;
+                return -1;
 
             case 2:
                 if(money >= 200)
-                    return true;
-                return false;
+                    return 200;
+                return -1;
         }
-        return false;
+        return -1;
     }
 }

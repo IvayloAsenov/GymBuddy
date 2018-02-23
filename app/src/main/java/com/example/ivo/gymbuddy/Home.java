@@ -5,6 +5,7 @@
 package com.example.ivo.gymbuddy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,9 +23,6 @@ import java.util.Calendar;
 
 public class Home extends AppCompatActivity implements BodyTypes{
 
-    // Declare radio buttons, buttons and image views
-    RadioGroup rg;
-
     ImageButton b_add_workout;
     ImageButton b_viewWorkouts;
     ImageButton ib_shop;
@@ -39,21 +37,12 @@ public class Home extends AppCompatActivity implements BodyTypes{
     ImageButton ib_stopWorkout;
 
     int money=0;
-
-    // Minutes and seconds for the timer
-    int minutes = 0;
-    int seconds = 0;
-
     String workout=""; // String that will hold the current workout
 
     int current_body = 0; // Variable used to cycle through body types
 
     int daily_challenge; // Variable used to store challenge
     int weekly_challenge;
-
-    int currentScore;
-
-    private int workout_counter; // Public variable used to count workouts
 
     // Declare objects
     SaveFile sf;
@@ -93,7 +82,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         tv_timer = (TextView) findViewById(R.id.tv_timer);
 
         tv_scoreCounter = (TextView) findViewById(R.id.tv_scoreCounter);
-        tv_scoreCounter.setText(s.getCurrentScore());
+        tv_scoreCounter.setText(Integer.toString(s.getCurrentScore()));
 
         iv_body_type = (ImageView) findViewById(R.id.iv_body_type);
 
@@ -107,7 +96,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_shop = (ImageButton) findViewById(R.id.ib_shop);
 
         // Update money
-        money = getIntent().getIntExtra("MONEY", Integer.parseInt(tv_scoreCounter.getText().toString()));
+        money = s.getCurrentScore();
 
         // Change activity -> add Workout
         b_add_workout.setOnClickListener(new View.OnClickListener() {
@@ -159,20 +148,20 @@ public class Home extends AppCompatActivity implements BodyTypes{
                 // If challenge is completed, then add score
                 if (idc.checkCompletion(daily_challenge, minutes, workout))
                 {
-                    currentScore = Integer.parseInt(s.getCurrentScore());
-                    currentScore += 1;
+                    money = s.getCurrentScore();
+                    money += 1;
 
-                    tv_scoreCounter.setText(Integer.toString(currentScore));
-                    s.setCurrentScore(Integer.toString(currentScore));
+                    tv_scoreCounter.setText(Integer.toString(money));
+                    s.setCurrentScore(money);
                 }
 
                 if (iwc.checkCompletion(weekly_challenge, minutes, workout))
                 {
-                    currentScore = Integer.parseInt(s.getCurrentScore());
-                    currentScore += 5;
+                    money = s.getCurrentScore();
+                    money += 5;
 
-                    tv_scoreCounter.setText(Integer.toString(currentScore));
-                    s.setCurrentScore(Integer.toString(currentScore));
+                    tv_scoreCounter.setText(Integer.toString(money));
+                    s.setCurrentScore(money);
                 }
             }
         });
@@ -188,9 +177,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ShopScreen.class);
-                //money = Integer.parseInt(tv_scoreCounter.getText().toString());
-                money = 50;
-                intent.putExtra("MONEY", money);
                 startActivity(intent);
             }
         });
@@ -218,4 +204,12 @@ public class Home extends AppCompatActivity implements BodyTypes{
         cw.showDialog(t);
     }
 
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+
+        tv_scoreCounter.setText(Integer.toString(s.getCurrentScore()));
+    }
 }

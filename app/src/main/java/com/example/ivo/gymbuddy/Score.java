@@ -18,13 +18,13 @@ public class Score {
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_score", Context.MODE_PRIVATE);
     }
 
-    public String getCurrentScore(){
+    public int getCurrentScore(){
         int currentScore = sharedPref.getInt("score", 0);
-        return Integer.toString(currentScore);
+        return currentScore;
     }
 
-    public void setCurrentScore(String score){
+    public void setCurrentScore(int score){
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("score", Integer.parseInt(score)).commit(); // Save as daily challenge completed
+        editor.putInt("score", score).commit(); // Save as daily challenge completed
     }
 }
