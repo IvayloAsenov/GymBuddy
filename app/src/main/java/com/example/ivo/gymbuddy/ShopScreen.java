@@ -72,7 +72,7 @@ public class ShopScreen extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(getApplicationContext(), "NOT ENOUGH MONEY", LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Page Scrolled", LENGTH_LONG).show();
             }
 
             @Override
