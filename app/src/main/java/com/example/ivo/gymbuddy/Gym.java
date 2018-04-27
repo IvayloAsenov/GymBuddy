@@ -18,6 +18,10 @@ public class Gym {
     SharedPreferences sharedPref;
     ArrayList<Integer> ownedGyms;
 
+    /**
+     * Constructor
+     * @param a Activity
+     */
     public Gym(Activity a){
         activity = a;
         sharedPref = activity.getApplicationContext().getSharedPreferences("GYMS", Context.MODE_PRIVATE);

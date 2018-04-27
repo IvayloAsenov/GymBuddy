@@ -10,13 +10,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
- * Created by Ivo on 11/19/2017.
+ * Chooses workout once the start button has been clicked
+ *
+ * @author Ivaylo Asenov
  */
 
 public class ChooseWorkout{
-
-
-    // Declare all views
 
     Activity activity;
     ImageButton ib_shoulders;
@@ -31,27 +30,25 @@ public class ChooseWorkout{
 
     String workout = "";
 
-    // Constructor to get Home's activity
     ChooseWorkout(Activity a){
         activity = a;
     }
 
-    TimerSwitch t; // TimerSwitch object
+    TimerSwitch t;
 
-
-    // Method to show dialog and to take care of button clicks
+    /**
+     * method to show dialog and to take care of button clicks
+     * @param _t TimerSwitch object
+     */
     protected void showDialog(TimerSwitch _t){
 
         t = _t;
 
-
-        // Create Dialog
         dialog = new Dialog(activity);
         dialog.setContentView(R.layout.choose_workout);
 
         View v = LayoutInflater.from(activity).inflate(R.layout.choose_workout, null); // Inflate choose_workout layout
 
-        // Create ImageButtons
         ib_shoulders = (ImageButton) dialog.findViewById(R.id.ib_shoulders);
         ib_running = (ImageButton) dialog.findViewById(R.id.ib_run);
         ib_cycling = (ImageButton) dialog.findViewById(R.id.ib_cycling);
@@ -60,8 +57,6 @@ public class ChooseWorkout{
         ib_triceps = (ImageButton) dialog.findViewById(R.id.ib_triceps);
         ib_back = (ImageButton) dialog.findViewById(R.id.ib_back);
 
-
-        // ImageButton click events
         ib_shoulders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,8 +110,10 @@ public class ChooseWorkout{
         dialog.show();
     }
 
-    // Method called when method is clicked
-    // Cancels the dialog and start timer
+    /**
+     * Cancels the dialog and starts timer
+     * @param _workout
+     */
     protected void onButtonClick(String _workout){
 
         dialog.cancel();
@@ -125,7 +122,9 @@ public class ChooseWorkout{
         t.startTimer();
     }
 
-    // Return the workout
+    /**
+     * @return String workout
+     */
     protected String getWorkout(){
         return workout;
     }

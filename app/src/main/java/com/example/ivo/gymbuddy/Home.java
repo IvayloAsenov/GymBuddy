@@ -21,6 +21,12 @@ import com.example.ivo.gymbuddy.ChallengePackage.InformationWeeklyChallenges;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Main screen of the app. Takes care of button clicks
+ *
+ * @author Ivaylo Asenov
+ */
+
 public class Home extends AppCompatActivity implements BodyTypes{
 
     ImageButton b_add_workout;
@@ -44,7 +50,6 @@ public class Home extends AppCompatActivity implements BodyTypes{
     int daily_challenge; // Variable used to store challenge
     int weekly_challenge;
 
-    // Declare objects
     SaveFile sf;
     BodyType bt;
     WorkoutCounter wc;
@@ -55,6 +60,10 @@ public class Home extends AppCompatActivity implements BodyTypes{
     InformationWeeklyChallenges iwc;
     Score s;
 
+    /**
+     * Method that runs once app starts
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,8 +191,10 @@ public class Home extends AppCompatActivity implements BodyTypes{
         });
     }
 
-    /*
-        Formats the string that is going to be saved to the file
+    /**
+     * Formats the string that is going to be saved to the file
+     * @param workout String workout
+     * @param s_time String time
      */
     public void formatMessage(String workout, String s_time)
     {
@@ -196,8 +207,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         sf.saveToFile(message);
     }
 
-    /*
-        Creates a pop up dialog that lets the user choose a workout
+    /**
+     * Creates a popup dialog that lets the user choose a workout
      */
     private void createDialog()
     {
@@ -205,6 +216,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
     }
 
 
+    /**
+     * Takes care when app is resumed
+     */
     @Override
     protected void onResume() {
 

@@ -30,6 +30,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+/**
+ * Let's the user add a workout he has already completed
+ *
+ * @author IvayloA
+ */
 public class AddWorkout extends AppCompatActivity implements Workouts {
 
     Spinner spinner_workouts;
@@ -39,14 +44,18 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     Context home_context;
     SaveFile sf;
 
+    /**
+     * Constructor that takes the context of Home
+     * @param context
+     */
     public AddWorkout(Context context){
         home_context = context;
     }
 
-    public AddWorkout(){
-
-    }
-
+    /**
+     * Create method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,28 +93,16 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         });
     }
 
-    /*
-        Save method used to save data on file and read from it
-        in Append | Private mode
+    /**
+     * Save method used to save data on file and read from it in
+     * Append | Private mode
      */
-
     public void Save()
     {
         String message;
         String s_workout = spinner_workouts.getSelectedItem().toString();
         String s_time = et_time.getText().toString();
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = df.format(c.getTime());
-
-        message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
-        sf.saveToFile(message);
-    }
-
-    public void Save(String s_workout, String s_time)
-    {
-        String message;
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c.getTime());

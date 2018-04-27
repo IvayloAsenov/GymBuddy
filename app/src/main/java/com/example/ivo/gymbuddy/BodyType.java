@@ -1,24 +1,14 @@
-// File Name: Home.java
-// Developers: Ivaylo Asenov
-// Purpose: Cycles between body types
-
 package com.example.ivo.gymbuddy;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.Image;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 /**
- * Created by Ivo on 11/8/2017.
+ * Saves the current body type to a file and reads from it
+ *
+ * @author IvayloA
  */
 
 public class BodyType extends AppCompatActivity implements BodyTypes{
@@ -27,11 +17,19 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
     private Context context;
     ImageView iv_body_type;
 
+    /**
+     * Constructor that takes the context of Home
+     * @param context
+     */
     public BodyType(Context context)
     {
         this.context = context;
     }
 
+    /**
+     * Reads the body type from the file
+     * @return index of the body type
+     */
     protected int readBType()
     {
         int bt = 0;
@@ -39,13 +37,5 @@ public class BodyType extends AppCompatActivity implements BodyTypes{
         int defaultValue = 0;
         bt = sharedPref.getInt("saved_body_type", defaultValue);
         return bt;
-    }
-
-    protected void writeBCounter(int bt)
-    {
-        SharedPreferences sharedPref = context.getApplicationContext().getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("saved_body_type", bt);
-        editor.commit();
     }
 }
