@@ -42,7 +42,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     ImageButton ib_pauseWorkout;
     ImageButton ib_stopWorkout;
 
-    int money=0;
+    int money=1500;
     String workout=""; // String that will hold the current workout
 
     int current_body = 0; // Variable used to cycle through body types
@@ -105,6 +105,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         ib_shop = (ImageButton) findViewById(R.id.ib_shop);
 
         // Update money
+        s.setCurrentScore(2000);
         money = s.getCurrentScore();
 
         // Change activity -> add Workout

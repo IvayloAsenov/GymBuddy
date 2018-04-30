@@ -25,6 +25,13 @@ public class Gym {
     public Gym(Activity a){
         activity = a;
         sharedPref = activity.getApplicationContext().getSharedPreferences("GYMS", Context.MODE_PRIVATE);
+        ownedGyms = new ArrayList<>();
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("gym0", 0).commit();
+        editor.putInt("gym1", 0).commit();
+        editor.putInt("gym2", 0).commit();
+
     }
 
     /**
@@ -34,9 +41,11 @@ public class Gym {
      */
     public ArrayList<Integer> getOwnedGyms(){
 
-        ownedGyms.set(0, sharedPref.getInt("gym0", 0));
-        ownedGyms.set(1, sharedPref.getInt("gym1", 0));
-        ownedGyms.set(2, sharedPref.getInt("gym2", 0));
+        ownedGyms.clear();
+
+        ownedGyms.add(0, sharedPref.getInt("gym0", 0));
+        ownedGyms.add(1, sharedPref.getInt("gym1", 0));
+        ownedGyms.add(2, sharedPref.getInt("gym2", 0));
 
         return ownedGyms;
     }
