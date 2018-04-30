@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ivo.gymbuddy.ChallengePackage.Challenges;
 import com.example.ivo.gymbuddy.ChallengePackage.InformationDailyChallenges;
@@ -20,6 +22,8 @@ import com.example.ivo.gymbuddy.ChallengePackage.InformationWeeklyChallenges;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 /**
  * Main screen of the app. Takes care of button clicks
@@ -34,6 +38,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
     ImageButton ib_shop;
 
     ImageView iv_body_type;
+
+    LinearLayout iv_background;
 
     TextView tv_scoreCounter;
     TextView tv_timer;
@@ -59,6 +65,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
     InformationDailyChallenges idc;
     InformationWeeklyChallenges iwc;
     Score s;
+    Gym g;
 
     /**
      * Method that runs once app starts
@@ -79,6 +86,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
         idc = new InformationDailyChallenges(this);
         iwc = new InformationWeeklyChallenges(this);
         s = new Score(this);
+        g = new Gym(this);
 
         // Get daily challenge
         daily_challenge = c.getDailyChallenge();
@@ -94,6 +102,8 @@ public class Home extends AppCompatActivity implements BodyTypes{
         tv_scoreCounter.setText(Integer.toString(s.getCurrentScore()));
 
         iv_body_type = (ImageView) findViewById(R.id.iv_body_type);
+
+        iv_background = (LinearLayout) findViewById(R.id.background);
 
         current_body = bt.readBType();
         iv_body_type.setImageResource(imageList[current_body]);
@@ -225,6 +235,15 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
         super.onResume();
 
+        int background;
         tv_scoreCounter.setText(Integer.toString(s.getCurrentScore()));
+
+        background = g.getCurrentGym();
+
+        switch(background){
+            case -1:
+                iv_background.setBackground();
+        }
+
     }
 }

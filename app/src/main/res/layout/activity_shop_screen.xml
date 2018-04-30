@@ -43,6 +43,15 @@
             android:visibility="invisible"
             app:srcCompat="@mipmap/ic_launcher_round" />
 
+        <TextView
+            android:id="@+id/tv_statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="24dp"
+            android:visibility="invisible"
+            android:text="Currently Selected" />
+
     </RelativeLayout>
 
 </LinearLayout>

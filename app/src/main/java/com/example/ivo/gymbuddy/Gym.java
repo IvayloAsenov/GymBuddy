@@ -17,6 +17,7 @@ public class Gym {
     Activity activity;
     SharedPreferences sharedPref;
     ArrayList<Integer> ownedGyms;
+    SharedPreferences.Editor editor;
 
     /**
      * Constructor
@@ -27,7 +28,7 @@ public class Gym {
         sharedPref = activity.getApplicationContext().getSharedPreferences("GYMS", Context.MODE_PRIVATE);
         ownedGyms = new ArrayList<>();
 
-        SharedPreferences.Editor editor = sharedPref.edit();
+        editor = sharedPref.edit();
         editor.putInt("gym0", 0).commit();
         editor.putInt("gym1", 0).commit();
         editor.putInt("gym2", 0).commit();
@@ -56,8 +57,6 @@ public class Gym {
      * @param position The position of the gym that is being bought
      */
     public void saveGym(int position){
-        SharedPreferences.Editor editor = sharedPref.edit();
-
         switch(position){
             case 0:
                 editor.putInt("gym0", 1).commit();
@@ -69,5 +68,21 @@ public class Gym {
                 editor.putInt("gym2", 1).commit();
                 break;
         }
+    }
+
+    /**
+     * Saves current gym
+     *
+     * @param position The position of the gym 0/old 1/intermediate 2/expensive
+     */
+    public void setCurrentGym(int position){
+        editor.putInt("currentGym", position).commit();
+    }
+
+    /**
+     * Returns the position of the current gym
+     */
+    public int getCurrentGym(){
+        return sharedPref.getInt("currentGym", -1); // If not yet saved then current gym is the starter gym
     }
 }

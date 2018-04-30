@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class ShopScreen extends AppCompatActivity {
 
     ImageButton ib_buy;
     ImageButton ib_setBg;
+
+    TextView tv_status;
 
     private int money;
     private int deductMoney;
@@ -54,6 +57,8 @@ public class ShopScreen extends AppCompatActivity {
         ib_buy = (ImageButton) findViewById(R.id.ib_buy);
         ib_setBg = (ImageButton) findViewById(R.id.ib_setBg);
 
+        tv_status = (TextView) findViewById(R.id.tv_statusText);
+
         ib_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +66,6 @@ public class ShopScreen extends AppCompatActivity {
                     // had enough money to buy DONE
                     // change button to set background
                     // update money DONE
-                    //Toast.makeText(getApplicationContext(), "BOUGHT GYM", LENGTH_LONG).show();
                     money = money - deductMoney;
                     s.setCurrentScore(money);
 
@@ -71,12 +75,27 @@ public class ShopScreen extends AppCompatActivity {
                     ib_buy.setClickable(false);
                     ib_buy.setVisibility(View.INVISIBLE);
 
+                    ib_setBg.setVisibility(View.VISIBLE);
+                    ib_setBg.setClickable(true);
 
                 }else{
                     // didn't have enough money to buy DONE
-                    // display error message
+                    // make button shake with red text??
                     Toast.makeText(getApplicationContext(), "NOT ENOUGH MONEY", LENGTH_LONG).show();
                 }
+            }
+        });
+
+        ib_setBg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                g.setCurrentGym(viewPager.getCurrentItem());
+
+                // Change background from previous activity?
+                ib_setBg.setClickable(false);
+                ib_setBg.setVisibility(View.INVISIBLE);
+
+                tv_status.setVisibility(View.VISIBLE);
             }
         });
 
@@ -90,12 +109,20 @@ public class ShopScreen extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Page Scrolled", LENGTH_LONG).show();
                 ownedGyms = g.getOwnedGyms();
 
+                tv_status.setVisibility(View.INVISIBLE);
+
                 if(ownedGyms.get(position) == 1){
                     ib_buy.setVisibility(View.INVISIBLE);
                     ib_setBg.setVisibility(View.VISIBLE);
                 }else{
                     ib_buy.setVisibility(View.VISIBLE);
                     ib_setBg.setVisibility(View.INVISIBLE);
+                }
+
+                if(position == g.getCurrentGym()){
+                    tv_status.setVisibility(View.VISIBLE);
+                    ib_setBg.setVisibility(View.INVISIBLE);
+                    ib_setBg.setClickable(false);
                 }
             }
 
