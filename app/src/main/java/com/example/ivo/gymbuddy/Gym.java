@@ -29,9 +29,9 @@ public class Gym {
         ownedGyms = new ArrayList<>();
 
         editor = sharedPref.edit();
-        editor.putInt("gym0", 0).commit();
-        editor.putInt("gym1", 0).commit();
-        editor.putInt("gym2", 0).commit();
+       // editor.putInt("gym0", 0).commit();
+       // editor.putInt("gym1", 0).commit();
+       // editor.putInt("gym2", 0).commit();
 
     }
 

@@ -4,9 +4,13 @@
 
 package com.example.ivo.gymbuddy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -31,7 +35,7 @@ import static android.widget.Toast.LENGTH_LONG;
  * @author Ivaylo Asenov
  */
 
-public class Home extends AppCompatActivity implements BodyTypes{
+public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds{
 
     ImageButton b_add_workout;
     ImageButton b_viewWorkouts;
@@ -71,6 +75,7 @@ public class Home extends AppCompatActivity implements BodyTypes{
      * Method that runs once app starts
      * @param savedInstanceState
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +112,9 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
         current_body = bt.readBType();
         iv_body_type.setImageResource(imageList[current_body]);
+
+        //iv_background.setBackground(ContextCompat.getDrawable(this, backgroundList[1]));
+        iv_background.setBackgroundResource(backgroundList[g.getCurrentGym()+1]);
 
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
         ib_stopWorkout = (ImageButton) findViewById(R.id.ib_stopWorkout);
@@ -242,7 +250,17 @@ public class Home extends AppCompatActivity implements BodyTypes{
 
         switch(background){
             case -1:
-                iv_background.setBackground();
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[0]));
+                break;
+            case 0:
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[1]));
+                break;
+            case 1:
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[2]));
+                break;
+            case 2:
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[3]));
+                break;
         }
 
     }
