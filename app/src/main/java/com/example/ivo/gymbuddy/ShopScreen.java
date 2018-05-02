@@ -59,6 +59,10 @@ public class ShopScreen extends AppCompatActivity {
 
         tv_status = (TextView) findViewById(R.id.tv_statusText);
 
+        ownedGyms = g.getOwnedGyms();
+
+        setButtons();
+
         ib_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,24 +110,10 @@ public class ShopScreen extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(getApplicationContext(), "Page Scrolled", LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Page Scrolled", LENGTH_LONG).show();
                 ownedGyms = g.getOwnedGyms();
-
                 tv_status.setVisibility(View.INVISIBLE);
-
-                if(ownedGyms.get(position) == 1){
-                    ib_buy.setVisibility(View.INVISIBLE);
-                    ib_setBg.setVisibility(View.VISIBLE);
-                }else{
-                    ib_buy.setVisibility(View.VISIBLE);
-                    ib_setBg.setVisibility(View.INVISIBLE);
-                }
-
-                if(position == g.getCurrentGym()){
-                    tv_status.setVisibility(View.VISIBLE);
-                    ib_setBg.setVisibility(View.INVISIBLE);
-                    ib_setBg.setClickable(false);
-                }
+                setButtons();
             }
 
             @Override
@@ -131,5 +121,27 @@ public class ShopScreen extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setButtons(){
+        if(ownedGyms.get(viewPager.getCurrentItem()) == 1){
+            ib_buy.setVisibility(View.INVISIBLE);
+            ib_buy.setClickable(false);
+
+            ib_setBg.setVisibility(View.VISIBLE);
+            ib_setBg.setClickable(true);
+        }else{
+            ib_buy.setVisibility(View.VISIBLE);
+            ib_buy.setClickable(true);
+
+            ib_setBg.setVisibility(View.INVISIBLE);
+            ib_setBg.setClickable(false);
+        }
+
+        if(viewPager.getCurrentItem() == g.getCurrentGym()){
+            tv_status.setVisibility(View.VISIBLE);
+            ib_setBg.setVisibility(View.INVISIBLE);
+            ib_setBg.setClickable(false);
+        }
     }
 }
