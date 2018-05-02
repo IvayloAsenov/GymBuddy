@@ -2,10 +2,9 @@ TO DO
 
 Important
 ---------
-- Shop: being able to purchase different gyms with the money 
-        from challenges
-- New challenges screen: change the current design of the challenges
-                         screen. Maybe add another Activity
+- Challenges: Add icons for UI
+
+- Login: Set the login logic
                          
 Less important
 --------------

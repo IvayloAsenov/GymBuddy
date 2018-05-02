@@ -1,5 +1,5 @@
 /**
- * ShopScreen
+ * Used to display the buttons of the ShopScreen and take care of the actions
  *
  * @author Ivaylo Asenov
  */
@@ -37,6 +37,11 @@ public class ShopScreen extends AppCompatActivity {
 
     Gym g;
 
+    /**
+     * Method called when first created
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,23 +72,16 @@ public class ShopScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if((deductMoney = si.buyGym(viewPager.getCurrentItem(), money)) != -1){
-                    // had enough money to buy DONE
-                    // change button to set background
-                    // update money DONE
                     money = money - deductMoney;
                     s.setCurrentScore(money);
-
                     g.saveGym(viewPager.getCurrentItem());
-                    Toast.makeText(getApplicationContext(), "BOUGHT GYM" + viewPager.getCurrentItem(), LENGTH_LONG).show();
 
                     ib_buy.setClickable(false);
                     ib_buy.setVisibility(View.INVISIBLE);
 
                     ib_setBg.setVisibility(View.VISIBLE);
                     ib_setBg.setClickable(true);
-
                 }else{
-                    // didn't have enough money to buy DONE
                     // make button shake with red text??
                     Toast.makeText(getApplicationContext(), "NOT ENOUGH MONEY", LENGTH_LONG).show();
                 }
@@ -95,7 +93,6 @@ public class ShopScreen extends AppCompatActivity {
             public void onClick(View v){
                 g.setCurrentGym(viewPager.getCurrentItem());
 
-                // Change background from previous activity?
                 ib_setBg.setClickable(false);
                 ib_setBg.setVisibility(View.INVISIBLE);
 
@@ -123,6 +120,9 @@ public class ShopScreen extends AppCompatActivity {
         });
     }
 
+    /**
+     * Used to synchronize the buttons
+     */
     private void setButtons(){
         if(ownedGyms.get(viewPager.getCurrentItem()) == 1){
             ib_buy.setVisibility(View.INVISIBLE);

@@ -29,7 +29,7 @@ public class User {
         return gender;
     }
 
-    public String getPassowrd() {return passowrd; }
+    public String getPassword() {return passowrd; }
 
 
     private String name, email, passowrd, age, gender;

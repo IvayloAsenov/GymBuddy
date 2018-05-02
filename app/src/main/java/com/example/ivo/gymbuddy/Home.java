@@ -62,7 +62,6 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
 
     SaveFile sf;
     BodyType bt;
-    WorkoutCounter wc;
     TimerSwitch t;
     Challenges c;
     ChooseWorkout cw;
@@ -84,7 +83,6 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         // Create objects
         sf = new SaveFile(this);
         bt = new BodyType(this);
-        wc = new WorkoutCounter(this);
         t = new TimerSwitch(this);
         c = new Challenges(this);
         cw = new ChooseWorkout(this);

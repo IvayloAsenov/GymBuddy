@@ -46,7 +46,7 @@ public class SaveFile extends AppCompatActivity{
 
         SharedPreferences.Editor editor = userPreferences.edit();
         editor.putString("email", newUser.getEmail());
-        editor.putString("password", newUser.getPassowrd());
+        editor.putString("password", newUser.getPassword());
         editor.putString("age", newUser.getAge());
         editor.putString("gender", newUser.getGender());
         editor.commit();

@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id = "@+id/account"
-        android:title="My Account"/>
+    <item android:title="DAILY CHALLENGE" />
+
+    <item
+        android:id="@+id/account"
+        android:icon="@color/colorAccent"
+        android:title="My Account" />
+
+    <item
+        android:title="WEEKLY CHALLENGE"/>
 
     <item android:id = "@+id/user"
         android:title="Username"/>
 
     <item android:id = "@+id/logout"
-        android:title="Logout"/>
+        android:title="Logout"
+        android:checked="true"/>
+
 </menu>
