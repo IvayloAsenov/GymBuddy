@@ -17,17 +17,17 @@ class ShopItems {
     protected int buyGym(int position, int money){
 
         switch (position){
-            case 0:
+            case 1:
                 if(money >= 10)
                     return 10;
                 return -1;
 
-            case 1:
+            case 2:
                 if(money >= 50)
                     return 50;
                 return -1;
 
-            case 2:
+            case 3:
                 if(money >= 200)
                     return 200;
                 return -1;
