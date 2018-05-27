@@ -251,12 +251,15 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[0]));
                 break;
             case 0:
-                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[1]));
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[0]));
                 break;
             case 1:
-                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[2]));
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[1]));
                 break;
             case 2:
+                iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[2]));
+                break;
+            case 3:
                 iv_background.setBackgroundDrawable(ContextCompat.getDrawable(this, backgroundList[3]));
                 break;
         }

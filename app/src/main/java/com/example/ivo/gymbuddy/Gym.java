@@ -40,9 +40,10 @@ public class Gym {
 
         ownedGyms.clear();
 
-        ownedGyms.add(0, sharedPref.getInt("gym0", 0));
+        ownedGyms.add(0, sharedPref.getInt("gym0", 1));
         ownedGyms.add(1, sharedPref.getInt("gym1", 0));
         ownedGyms.add(2, sharedPref.getInt("gym2", 0));
+        ownedGyms.add(3, sharedPref.getInt("gym3", 0));
 
         return ownedGyms;
     }
@@ -54,14 +55,14 @@ public class Gym {
      */
     public void saveGym(int position){
         switch(position){
-            case 0:
-                editor.putInt("gym0", 1).commit();
-                break;
             case 1:
                 editor.putInt("gym1", 1).commit();
                 break;
             case 2:
                 editor.putInt("gym2", 1).commit();
+                break;
+            case 3:
+                editor.putInt("gym3", 1).commit();
                 break;
         }
     }
