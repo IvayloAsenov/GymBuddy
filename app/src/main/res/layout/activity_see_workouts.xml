@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/see_workouts_background">
 
     <TextView
         android:id="@+id/textView2"
@@ -22,8 +23,9 @@
             android:id="@+id/tv_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="28dp"
+            android:textSize="24dp"
             android:gravity="center"
-            android:textColor="#35373c"/>
+            android:textColor="#35373c"
+            android:layout_marginLeft="15dp"/>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
