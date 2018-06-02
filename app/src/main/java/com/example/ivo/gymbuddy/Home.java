@@ -112,7 +112,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         iv_body_type.setImageResource(imageList[current_body]);
 
         //iv_background.setBackground(ContextCompat.getDrawable(this, backgroundList[1]));
-        iv_background.setBackgroundResource(backgroundList[g.getCurrentGym()+1]);
+        iv_background.setBackgroundResource(backgroundList[g.getCurrentGym()]);
 
         ib_startWorkout = (ImageButton) findViewById(R.id.ib_startWorkout);
         ib_stopWorkout = (ImageButton) findViewById(R.id.ib_stopWorkout);

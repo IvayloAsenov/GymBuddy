@@ -45,14 +45,6 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     SaveFile sf;
 
     /**
-     * Constructor that takes the context of Home
-     * @param context
-     */
-    public AddWorkout(Context context){
-        home_context = context;
-    }
-
-    /**
      * Create method
      * @param savedInstanceState
      */
