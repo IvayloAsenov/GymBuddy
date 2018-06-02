@@ -40,9 +40,20 @@ public class SeeWorkouts extends AppCompatActivity {
             tv_data.append("\n");
 
             st = new StringTokenizer(s);
-            while(st.hasMoreTokens())
-                tv_data.append(st.nextToken() + "\t");
+            while(st.hasMoreTokens()) {
+                String token = st.nextToken();
+                int length = token.length();
 
+                tv_data.append(token);
+                if (length <= 6){
+                    while (length <= 7) {
+                        tv_data.append(" ");
+                        length++;
+                    }
+                }
+                if(st.hasMoreTokens())
+                    tv_data.append("   ");
+            }
         }
     }
 
