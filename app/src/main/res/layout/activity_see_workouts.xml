@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/see_workouts_background">
+    android:background="#59d0dfff">
 
     <TextView
         android:id="@+id/textView2"
@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="Workout Log"
         android:textSize="67dp"
-        android:textColor="#35373c"/>
+        android:textColor="#6893ee"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

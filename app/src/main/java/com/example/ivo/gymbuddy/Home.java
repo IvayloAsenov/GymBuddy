@@ -152,6 +152,8 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_stopWorkout.setVisibility(View.VISIBLE);
                 ib_pauseWorkout.setClickable(true);
                 ib_pauseWorkout.setVisibility(View.VISIBLE);
+                ib_shop.setVisibility(View.INVISIBLE);
+                ib_shop.setClickable(true);
                 createDialog();
             }
         });
@@ -165,6 +167,9 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_pauseWorkout.setVisibility(View.INVISIBLE);
                 ib_startWorkout.setVisibility(View.VISIBLE);
                 ib_startWorkout.setClickable(true);
+                ib_shop.setVisibility(View.VISIBLE);
+                ib_shop.setClickable(false);
+
                 String s_time = t.stopTimer();
                 workout = cw.getWorkout();
                 formatMessage(workout, s_time);
