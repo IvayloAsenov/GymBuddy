@@ -1,13 +1,10 @@
-TO DO
+to do list
 
-Important
----------
-- Challenges: Add icons for UI
-
-- Login: Set the login logic
-                         
-Less important
---------------
-- UI/Designs 
-- Comments 
-- Fix bugs
+- when entering workout, show in xx:xx:xx format and not xx
+- better ui for addWorkout screen
+- better ui for workoutLog screen 
+- shop/set/buy buttons to do
+- person design 
+- sometimes start workout doesn't correctly show the muscle groups
+- pause/stop workout buttons to do
+- muscle groups images to do 
