@@ -12,10 +12,6 @@ public interface BodyTypes
 {
     int[] imageList = new int[]
             {
-                    R.drawable.bt_5,
-                    R.drawable.bt_4,
-                    R.drawable.bt_3,
-                    R.drawable.bt_2,
-                    R.drawable.bt_1
+                    R.drawable.body_type_final_1
             };
 }

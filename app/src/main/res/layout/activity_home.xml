@@ -49,7 +49,7 @@
                     android:gravity="center_horizontal|center"
                     android:text="00:00:00"
                     android:textColor="@android:color/white"
-                    android:textSize="36dp"
+                    android:textSize="32dp"
                     android:visibility="visible" />
             </RelativeLayout>
 
@@ -74,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingBottom="30dp"
                 android:visibility="visible"
                 app:srcCompat="@drawable/bt_3" />
         </LinearLayout>
