@@ -2,7 +2,9 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group>
     <item android:title="DAILY CHALLENGE" />
+    </group>
 
     <item
         android:id="@+id/account"
@@ -14,9 +16,4 @@
 
     <item android:id = "@+id/user"
         android:title="Username"/>
-
-    <item android:id = "@+id/logout"
-        android:title="Logout"
-        android:checked="true"/>
-
 </menu>
