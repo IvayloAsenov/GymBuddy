@@ -3,6 +3,7 @@ package com.example.ivo.gymbuddy;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,20 +16,21 @@ import android.widget.Toast;
  * @author Ivaylo Asenov
  */
 
-public class ChooseWorkout{
+public class ChooseWorkout {
 
     Activity activity;
-    ImageButton ib_shoulders;
-    ImageButton ib_running;
-    ImageButton ib_cycling;
     ImageButton ib_chest;
-    ImageButton ib_biceps;
-    ImageButton ib_triceps;
     ImageButton ib_back;
+    ImageButton ib_shoulders;
+    ImageButton ib_arms;
+    ImageButton ib_legs;
+    ImageButton ib_run;
+    ImageButton ib_cycle;
+    ImageButton ib_other;
 
     Dialog dialog;
 
-    String workout = "";
+    String workout;
 
     ChooseWorkout(Activity a){
         activity = a;
@@ -42,6 +44,8 @@ public class ChooseWorkout{
      */
     protected void showDialog(TimerSwitch _t){
 
+        workout = "";
+
         t = _t;
 
         dialog = new Dialog(activity);
@@ -49,53 +53,19 @@ public class ChooseWorkout{
 
         View v = LayoutInflater.from(activity).inflate(R.layout.choose_workout, null); // Inflate choose_workout layout
 
-        ib_shoulders = (ImageButton) dialog.findViewById(R.id.ib_shoulders);
-        ib_running = (ImageButton) dialog.findViewById(R.id.ib_run);
-        ib_cycling = (ImageButton) dialog.findViewById(R.id.ib_cycling);
         ib_chest = (ImageButton) dialog.findViewById(R.id.ib_chest);
-        ib_biceps = (ImageButton) dialog.findViewById(R.id.ib_biceps);
-        ib_triceps = (ImageButton) dialog.findViewById(R.id.ib_triceps);
         ib_back = (ImageButton) dialog.findViewById(R.id.ib_back);
-
-        ib_shoulders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick("Shoulders");
-            }
-        });
-
-        ib_running.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick("Running");
-            }
-        });
-
-        ib_cycling.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick("Cycling");
-            }
-        });
+        ib_shoulders = (ImageButton) dialog.findViewById(R.id.ib_shoulders);
+        ib_arms = (ImageButton) dialog.findViewById(R.id.ib_arms);
+        ib_legs = (ImageButton) dialog.findViewById(R.id.ib_legs);
+        ib_run = (ImageButton) dialog.findViewById(R.id.ib_run);
+        ib_cycle = (ImageButton) dialog.findViewById(R.id.ib_cycle);
+        ib_other = (ImageButton) dialog.findViewById(R.id.ib_other);
 
         ib_chest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonClick("Chest");
-            }
-        });
-
-        ib_biceps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick("Biceps");
-            }
-        });
-
-        ib_triceps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick("Triceps");
             }
         });
 
@@ -106,7 +76,50 @@ public class ChooseWorkout{
             }
         });
 
+        ib_shoulders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Shoulders");
+            }
+        });
+
+        ib_arms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Arms");
+            }
+        });
+
+        ib_legs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Legs");
+            }
+        });
+
+        ib_run.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Run");
+            }
+        });
+
+        ib_cycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Cycle");
+            }
+        });
+
+        ib_other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Other");
+            }
+        });
+
         dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
         dialog.show();
     }
 

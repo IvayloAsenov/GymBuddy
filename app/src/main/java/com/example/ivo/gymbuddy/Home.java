@@ -146,6 +146,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createDialog();
                 ib_startWorkout.setVisibility(View.INVISIBLE);
                 ib_startWorkout.setClickable(false);
                 ib_stopWorkout.setClickable(true);
@@ -154,7 +155,6 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_pauseWorkout.setVisibility(View.VISIBLE);
                 ib_shop.setVisibility(View.INVISIBLE);
                 ib_shop.setClickable(true);
-                createDialog();
             }
         });
 

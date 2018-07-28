@@ -21,37 +21,37 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/ib_run"
+                android:id="@+id/ib_chest"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/body_1" />
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/body_2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageButton
                 android:id="@+id/ib_shoulders"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_2" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <ImageButton
-                android:id="@+id/ib_cycling"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
                 app:srcCompat="@drawable/body_3" />
 
             <ImageButton
-                android:id="@+id/ib_chest"
+                android:id="@+id/ib_arms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -67,14 +67,14 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/ib_triceps"
+                android:id="@+id/ib_legs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/body_2" />
 
             <ImageButton
-                android:id="@+id/ib_biceps"
+                android:id="@+id/ib_run"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -90,14 +90,14 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/ib_back"
+                android:id="@+id/ib_cycle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/body_4" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/ib_other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
