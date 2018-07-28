@@ -91,9 +91,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
+                android:background="@null"
                 android:clickable="false"
                 android:visibility="invisible"
-                app:srcCompat="@android:drawable/ic_media_pause" />
+                app:srcCompat="@drawable/pause_button" />
 
             <ImageButton
                 android:id="@+id/ib_startWorkout"
