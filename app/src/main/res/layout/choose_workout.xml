@@ -5,6 +5,7 @@
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:background="@null"
     >
 
     <LinearLayout
@@ -25,14 +26,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_1" />
+                android:background="@null"
+                app:srcCompat="@drawable/chest" />
 
             <ImageButton
                 android:id="@+id/ib_back"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_2" />
+                android:background="@null"
+                app:srcCompat="@drawable/back" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,14 +51,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_3" />
+                android:background="@null"
+                app:srcCompat="@drawable/shoulders" />
 
             <ImageButton
                 android:id="@+id/ib_arms"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_4" />
+                android:background="@null"
+                app:srcCompat="@drawable/arms" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,15 +75,17 @@
                 android:id="@+id/ib_legs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/body_2" />
+                android:layout_weight="2"
+                android:background="@null"
+                app:srcCompat="@drawable/legs" />
 
             <ImageButton
-                android:id="@+id/ib_run"
+                android:id="@+id/ib_abs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_1" />
+                android:background="@null"
+                app:srcCompat="@drawable/abs" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,18 +97,20 @@
             android:padding="10dp">
 
             <ImageButton
-                android:id="@+id/ib_cycle"
+                android:id="@+id/ib_run"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_4" />
+                android:background="@null"
+                app:srcCompat="@drawable/run" />
 
             <ImageButton
                 android:id="@+id/ib_other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/body_3" />
+                android:background="@null"
+                app:srcCompat="@drawable/other" />
         </LinearLayout>
 
     </LinearLayout>

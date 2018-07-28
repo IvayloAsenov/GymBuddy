@@ -24,8 +24,8 @@ public class ChooseWorkout {
     ImageButton ib_shoulders;
     ImageButton ib_arms;
     ImageButton ib_legs;
+    ImageButton ib_abs;
     ImageButton ib_run;
-    ImageButton ib_cycle;
     ImageButton ib_other;
 
     Dialog dialog;
@@ -58,8 +58,8 @@ public class ChooseWorkout {
         ib_shoulders = (ImageButton) dialog.findViewById(R.id.ib_shoulders);
         ib_arms = (ImageButton) dialog.findViewById(R.id.ib_arms);
         ib_legs = (ImageButton) dialog.findViewById(R.id.ib_legs);
+        ib_abs = (ImageButton) dialog.findViewById(R.id.ib_abs);
         ib_run = (ImageButton) dialog.findViewById(R.id.ib_run);
-        ib_cycle = (ImageButton) dialog.findViewById(R.id.ib_cycle);
         ib_other = (ImageButton) dialog.findViewById(R.id.ib_other);
 
         ib_chest.setOnClickListener(new View.OnClickListener() {
@@ -97,17 +97,17 @@ public class ChooseWorkout {
             }
         });
 
+        ib_abs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonClick("Abs");
+            }
+        });
+
         ib_run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonClick("Run");
-            }
-        });
-
-        ib_cycle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onButtonClick("Cycle");
             }
         });
 
