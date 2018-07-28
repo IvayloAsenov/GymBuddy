@@ -93,7 +93,17 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     {
         String message;
         String s_workout = spinner_workouts.getSelectedItem().toString();
+
         String s_time = et_time.getText().toString();
+        int i_time = Integer.parseInt(s_time);
+
+        int hours = i_time / 60;
+        int minutes = i_time % 60;
+
+        String s_minutes = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
+        String s_hours = (hours == 0) ? "0" : Integer.toString(hours);
+
+        s_time = s_hours + ":" + s_minutes + ":000";
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

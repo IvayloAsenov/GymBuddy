@@ -80,6 +80,6 @@ public class Gym {
      * Returns the position of the current gym
      */
     public int getCurrentGym(){
-        return sharedPref.getInt("currentGym", -1); // If not yet saved then current gym is the starter gym
+        return sharedPref.getInt("currentGym", 0); // If not yet saved then current gym is the starter gym
     }
 }
