@@ -1,6 +1,7 @@
 package com.example.ivo.gymbuddy;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -52,25 +53,26 @@ public class SeeWorkouts extends AppCompatActivity {
 
         StringTokenizer st;
 
-        workoutType = new TextView(context);
-        date = new TextView(context);
-        duration = new TextView(context);
-        cardView = new CardView(context);
-
         for(String s : workouts_arr) {
+
+            workoutType = new TextView(context);
+            date = new TextView(context);
+            duration = new TextView(context);
+            cardView = new CardView(context);
+
             st = new StringTokenizer(s);
             while(st.hasMoreTokens()) {
                 String token = st.nextToken();
                 if(count == 0) {
                     date = makeText(token);
+                    count++;
                 } else if(count == 1) {
                     workoutType = makeText(token);
+                    count++;
                 } else {
                     duration = makeText(token);
                     count = 0;
                 }
-
-                count++;
             }
 
             cardView = makeCard(workoutType, date, duration);
@@ -80,13 +82,27 @@ public class SeeWorkouts extends AppCompatActivity {
 
     private CardView makeCard(TextView workoutType, TextView date, TextView duration) {
         CardView cardView = new CardView(context);
+
+        Resources r = context.getResources();
+        int widthPx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                200,
+                r.getDisplayMetrics()
+        );
+
+        int heightPx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                80,
+                r.getDisplayMetrics()
+        );
+
         Toolbar.LayoutParams params = new Toolbar.LayoutParams(
-                Toolbar.LayoutParams.WRAP_CONTENT,
-                Toolbar.LayoutParams.WRAP_CONTENT
+                widthPx,heightPx
         );
 
         cardView.setLayoutParams(params);
-        cardView.setRadius(9);
+        cardView.setRadius(15);
+
         cardView.setContentPadding(15, 15, 15, 15);
         cardView.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
         cardView.setMaxCardElevation(15);
