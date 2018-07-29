@@ -87,4 +87,8 @@ class TimerSwitch {
             handler.postDelayed(this,0);
         }
     };
+
+    protected void clear(){
+        paused = false;
+    }
 }

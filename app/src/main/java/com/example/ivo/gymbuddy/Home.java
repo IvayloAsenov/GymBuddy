@@ -60,6 +60,8 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
     int daily_challenge; // Variable used to store challenge
     int weekly_challenge;
 
+    boolean workoutPaused;
+
     SaveFile sf;
     BodyType bt;
     TimerSwitch t;
@@ -90,6 +92,8 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         iwc = new InformationWeeklyChallenges(this);
         s = new Score(this);
         g = new Gym(this);
+
+        workoutPaused = false;
 
         // Get daily challenge
         daily_challenge = c.getDailyChallenge();
@@ -155,6 +159,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_pauseWorkout.setVisibility(View.VISIBLE);
                 ib_shop.setVisibility(View.INVISIBLE);
                 ib_shop.setClickable(false);
+                tv_scoreCounter.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -169,6 +174,11 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_startWorkout.setClickable(true);
                 ib_shop.setVisibility(View.VISIBLE);
                 ib_shop.setClickable(true);
+                tv_scoreCounter.setVisibility(View.VISIBLE);
+
+                workoutPaused = false;
+                ib_pauseWorkout.setImageResource(R.drawable.pause_button);
+                t.clear();
 
                 String s_time = t.stopTimer();
                 workout = cw.getWorkout();
@@ -194,13 +204,24 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                     tv_scoreCounter.setText(Integer.toString(money));
                     s.setCurrentScore(money);
                 }
+
+                Toast.makeText(getApplicationContext(), "Workout completed!", Toast.LENGTH_SHORT).show();
             }
         });
 
         ib_pauseWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 t.pauseTimer();
+
+                if(!workoutPaused) {
+                    workoutPaused = true;
+                    ib_pauseWorkout.setImageResource(R.drawable.resume_button);
+                } else {
+                    workoutPaused = false;
+                    ib_pauseWorkout.setImageResource(R.drawable.pause_button);
+                }
             }
         });
 
