@@ -82,8 +82,9 @@ class TimerSwitch {
             minutes = seconds/60;
             seconds = seconds % 60;
             milliSeconds = (int) (UpdateTime % 1000);
-            tv_timer.setText("" + minutes + ":" + String.format("%02d", seconds)
-            + ":" + String.format("%03d", milliSeconds));
+            milliSeconds /= 10;
+            tv_timer.setText(String.format("%02d", minutes) + ":" + String.format("%02d", seconds)
+            + ":" + String.format("%02d", milliSeconds));
             handler.postDelayed(this,0);
         }
     };
