@@ -77,8 +77,10 @@ public class SeeWorkouts extends AppCompatActivity {
                 }
             }
 
-            cardView = makeCard(workoutType, date, duration);
-            linearLayout.addView(cardView);
+            if(!workoutType.getText().toString().equals("")) {
+                cardView = makeCard(workoutType, date, duration);
+                linearLayout.addView(cardView);
+            }
         }
     }
 
