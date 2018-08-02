@@ -11,7 +11,9 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -86,13 +88,13 @@ public class SeeWorkouts extends AppCompatActivity {
         Resources r = context.getResources();
         int widthPx = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                200,
+                280,
                 r.getDisplayMetrics()
         );
 
         int heightPx = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                80,
+                100,
                 r.getDisplayMetrics()
         );
 
@@ -100,13 +102,41 @@ public class SeeWorkouts extends AppCompatActivity {
                 widthPx,heightPx
         );
 
+//        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) cardView.getLayoutParams();
+//        layoutParams.setMargins(0, 0, heightPx, 0);
+//        cardView.requestLayout();
+
+        int leftMargin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                0,
+                r.getDisplayMetrics()
+        );
+        int rightMargin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                0,
+                r.getDisplayMetrics()
+        );
+        int topMargin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                0,
+                r.getDisplayMetrics()
+        );
+        int bottomMargin = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                20,
+                r.getDisplayMetrics()
+        );
+
+        params.setMargins(leftMargin,topMargin,rightMargin,bottomMargin);
+        params.gravity = Gravity.CENTER_HORIZONTAL;
+
         cardView.setLayoutParams(params);
-        cardView.setRadius(15);
+        cardView.setRadius(20);
 
         cardView.setContentPadding(15, 15, 15, 15);
-        cardView.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
+        cardView.setCardBackgroundColor(Color.parseColor("#82CAFA"));
         cardView.setMaxCardElevation(15);
-        cardView.setCardElevation(9);
+        cardView.setCardElevation(15);
 
         LinearLayout lr = new LinearLayout(context);
         lr.setLayoutParams(params);
