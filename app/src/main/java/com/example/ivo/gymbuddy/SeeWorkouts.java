@@ -3,6 +3,7 @@ package com.example.ivo.gymbuddy;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -67,12 +68,16 @@ public class SeeWorkouts extends AppCompatActivity {
                 String token = st.nextToken();
                 if(count == 0) {
                     date = makeText(token);
+                    date.setTextSize(24);
+                    date.setTypeface(null, Typeface.BOLD);
                     count++;
                 } else if(count == 1) {
                     workoutType = makeText(token);
+                    workoutType.setTextSize(18);
                     count++;
                 } else {
                     duration = makeText(token);
+                    duration.setTextSize(18);
                     count = 0;
                 }
             }
@@ -90,7 +95,7 @@ public class SeeWorkouts extends AppCompatActivity {
         Resources r = context.getResources();
         int widthPx = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                280,
+                320,
                 r.getDisplayMetrics()
         );
 
@@ -103,10 +108,6 @@ public class SeeWorkouts extends AppCompatActivity {
         Toolbar.LayoutParams params = new Toolbar.LayoutParams(
                 widthPx,heightPx
         );
-
-//        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) cardView.getLayoutParams();
-//        layoutParams.setMargins(0, 0, heightPx, 0);
-//        cardView.requestLayout();
 
         int leftMargin = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
@@ -140,15 +141,35 @@ public class SeeWorkouts extends AppCompatActivity {
         cardView.setMaxCardElevation(15);
         cardView.setCardElevation(15);
 
-        LinearLayout lr = new LinearLayout(context);
-        lr.setLayoutParams(params);
-        lr.setOrientation(LinearLayout.HORIZONTAL);
+        Toolbar.LayoutParams wrap_content_params = new Toolbar.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        );
 
-        lr.addView(date);
-        lr.addView(workoutType);
-        lr.addView(duration);
+        Toolbar.LayoutParams match_params = new Toolbar.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT
+        );
 
-        cardView.addView(lr);
+        LinearLayout vertical_layout = new LinearLayout(context);
+        vertical_layout.setOrientation(LinearLayout.VERTICAL);
+        vertical_layout.setLayoutParams(wrap_content_params);
+        LinearLayout horizontal_layout_one = new LinearLayout(context);
+        horizontal_layout_one.setLayoutParams(wrap_content_params);
+        LinearLayout horizontal_layout_two = new LinearLayout(context);
+        horizontal_layout_two.setLayoutParams(wrap_content_params);
+        LinearLayout horizontal_layout_three = new LinearLayout(context);
+        horizontal_layout_three.setLayoutParams(wrap_content_params);
+
+        horizontal_layout_one.addView(date);
+        horizontal_layout_two.addView(duration);
+        horizontal_layout_three.addView(workoutType);
+
+        vertical_layout.addView(horizontal_layout_one);
+        vertical_layout.addView(horizontal_layout_two);
+        vertical_layout.addView(horizontal_layout_three);
+
+        vertical_layout.setLayoutParams(params);
+
+        cardView.addView(vertical_layout);
 
         return cardView;
     }
