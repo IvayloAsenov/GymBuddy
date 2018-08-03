@@ -103,7 +103,8 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String s_minutes = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
         String s_hours = (hours == 0) ? "0" : Integer.toString(hours);
 
-        s_time = s_hours + ":" + s_minutes + ":000";
+        s_time = String.format("%02d", minutes) + ":" + "00"
+                + ":" + "00";
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

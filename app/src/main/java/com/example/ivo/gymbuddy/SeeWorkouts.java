@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class SeeWorkouts extends AppCompatActivity {
     private TextView date;
     private TextView duration;
     private CardView cardView;
+    private ImageView workoutIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class SeeWorkouts extends AppCompatActivity {
             date = new TextView(context);
             duration = new TextView(context);
             cardView = new CardView(context);
+            workoutIcon = new ImageView(context);
 
             st = new StringTokenizer(s);
             while(st.hasMoreTokens()) {
@@ -84,7 +87,7 @@ public class SeeWorkouts extends AppCompatActivity {
 
             if(!workoutType.getText().toString().equals("")) {
                 cardView = makeCard(workoutType, date, duration);
-                linearLayout.addView(cardView);
+                linearLayout.addView(cardView, 0);
             }
         }
     }
@@ -126,7 +129,7 @@ public class SeeWorkouts extends AppCompatActivity {
         );
         int bottomMargin = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                20,
+                15,
                 r.getDisplayMetrics()
         );
 
@@ -136,7 +139,7 @@ public class SeeWorkouts extends AppCompatActivity {
         cardView.setLayoutParams(params);
         cardView.setRadius(20);
 
-        cardView.setContentPadding(15, 15, 15, 15);
+        cardView.setContentPadding(15, 15, 0, 15);
         cardView.setCardBackgroundColor(Color.parseColor("#82CAFA"));
         cardView.setMaxCardElevation(15);
         cardView.setCardElevation(15);
@@ -145,9 +148,15 @@ public class SeeWorkouts extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
 
-        Toolbar.LayoutParams match_params = new Toolbar.LayoutParams(
+        Toolbar.LayoutParams match_params_height = new Toolbar.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT
         );
+
+        Toolbar.LayoutParams match_params = new Toolbar.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+        );
+
+        LinearLayout main_layout = new LinearLayout(context);
 
         LinearLayout vertical_layout = new LinearLayout(context);
         vertical_layout.setOrientation(LinearLayout.VERTICAL);
@@ -159,6 +168,13 @@ public class SeeWorkouts extends AppCompatActivity {
         LinearLayout horizontal_layout_three = new LinearLayout(context);
         horizontal_layout_three.setLayoutParams(wrap_content_params);
 
+        LinearLayout vertical_layout_two = new LinearLayout(context);
+        vertical_layout_two.setOrientation(LinearLayout.VERTICAL);
+
+        workoutIcon = makeIcon(workoutType.getText().toString());
+
+        vertical_layout_two.addView(workoutIcon);
+
         horizontal_layout_one.addView(date);
         horizontal_layout_two.addView(duration);
         horizontal_layout_three.addView(workoutType);
@@ -167,20 +183,49 @@ public class SeeWorkouts extends AppCompatActivity {
         vertical_layout.addView(horizontal_layout_two);
         vertical_layout.addView(horizontal_layout_three);
 
-        vertical_layout.setLayoutParams(params);
+        vertical_layout.setLayoutParams(wrap_content_params);
 
-        cardView.addView(vertical_layout);
+        main_layout.setLayoutParams(params);
+        match_params.setMargins(260, 0, 0, 0);
+        vertical_layout_two.setLayoutParams(match_params);
+        vertical_layout_two.setGravity(Gravity.END);
+
+        main_layout.addView(vertical_layout);
+        main_layout.addView(vertical_layout_two);
+
+        cardView.addView(main_layout);
 
         return cardView;
     }
 
+    private ImageView makeIcon(String workout) {
+
+        ImageView imageView = new ImageView(context);
+
+        if(workout.equals("Chest"))
+            imageView.setImageResource(R.drawable.chest);
+        else if(workout.equals("Back"))
+            imageView.setImageResource(R.drawable.back);
+        else if(workout.equals("Shoulders"))
+            imageView.setImageResource(R.drawable.shoulders);
+        else if(workout.equals("Arms"))
+            imageView.setImageResource(R.drawable.arms);
+        else if(workout.equals("Legs"))
+            imageView.setImageResource(R.drawable.legs);
+        else if(workout.equals("Abs"))
+            imageView.setImageResource(R.drawable.abs);
+        else if(workout.equals("Run"))
+            imageView.setImageResource(R.drawable.run);
+        else if(workout.equals("Other"))
+            imageView.setImageResource(R.drawable.other);
+
+
+        imageView.setBackgroundColor(Color.TRANSPARENT);
+        return imageView;
+    }
+
     private TextView makeText(String token) {
         TextView textView = new TextView(context);
-        Toolbar.LayoutParams params = new Toolbar.LayoutParams(
-                Toolbar.LayoutParams.WRAP_CONTENT,
-                Toolbar.LayoutParams.WRAP_CONTENT
-        );
-
         textView.setText(token);
         return textView;
     }
