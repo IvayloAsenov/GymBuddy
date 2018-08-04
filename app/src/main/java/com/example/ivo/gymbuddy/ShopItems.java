@@ -18,18 +18,18 @@ class ShopItems {
 
         switch (position){
             case 1:
-                if(money >= 10)
-                    return 10;
+                if(money >= 100)
+                    return 100;
                 return -1;
 
             case 2:
-                if(money >= 50)
-                    return 50;
+                if(money >= 300)
+                    return 300;
                 return -1;
 
             case 3:
-                if(money >= 200)
-                    return 200;
+                if(money >= 850)
+                    return 850;
                 return -1;
         }
         return -1;

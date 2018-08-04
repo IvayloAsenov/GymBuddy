@@ -5,17 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#A9A9A9"
     tools:context="com.example.ivo.gymbuddy.ShopScreen">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/shop_sign" />
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#D3D3D3"
         android:layout_weight="0.5"></android.support.v4.view.ViewPager>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="80dp"
+        android:background="#A9A9A9">
 
         <ImageButton
             android:id="@+id/ib_buy"
@@ -28,7 +42,18 @@
             android:layout_marginStart="33dp"
             android:background="@null"
             android:contentDescription="Click to buy a gym"
-            app:srcCompat="@drawable/b_workout_img" />
+            app:srcCompat="@drawable/shop_buy" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:gravity="right|center_vertical"
+            android:text="Price: This is the price!"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/ib_setBg"
@@ -41,14 +66,15 @@
             android:layout_marginRight="43dp"
             android:clickable="false"
             android:visibility="invisible"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:background="#A9A9A9"
+            app:srcCompat="@drawable/shop_set" />
 
         <TextView
             android:id="@+id/tv_statusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="24dp"
+            android:textSize="26dp"
             android:visibility="invisible"
             android:text="Currently Selected" />
 

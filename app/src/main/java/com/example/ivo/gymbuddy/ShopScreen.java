@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class ShopScreen extends AppCompatActivity {
+public class ShopScreen extends AppCompatActivity implements GymBackgrounds {
 
     ViewPager viewPager;
 
@@ -26,6 +26,7 @@ public class ShopScreen extends AppCompatActivity {
     ImageButton ib_setBg;
 
     TextView tv_status;
+    TextView tv_price;
 
     private int money;
     private int deductMoney;
@@ -63,6 +64,7 @@ public class ShopScreen extends AppCompatActivity {
         ib_setBg = (ImageButton) findViewById(R.id.ib_setBg);
 
         tv_status = (TextView) findViewById(R.id.tv_statusText);
+        tv_price  = (TextView) findViewById(R.id.tv_price);
 
         ownedGyms = g.getOwnedGyms();
 
@@ -75,6 +77,8 @@ public class ShopScreen extends AppCompatActivity {
                     money = money - deductMoney;
                     s.setCurrentScore(money);
                     g.saveGym(viewPager.getCurrentItem());
+
+                    tv_price.setVisibility(View.INVISIBLE);
 
                     ib_buy.setClickable(false);
                     ib_buy.setVisibility(View.INVISIBLE);
@@ -95,7 +99,6 @@ public class ShopScreen extends AppCompatActivity {
 
                 ib_setBg.setClickable(false);
                 ib_setBg.setVisibility(View.INVISIBLE);
-
                 tv_status.setVisibility(View.VISIBLE);
             }
         });
@@ -123,16 +126,24 @@ public class ShopScreen extends AppCompatActivity {
     /**
      * Used to synchronize the buttons
      */
-    private void setButtons(){
+    private void setButtons() {
+
+        int price = gymPrices[viewPager.getCurrentItem()];
+
         if(ownedGyms.get(viewPager.getCurrentItem()) == 1){
             ib_buy.setVisibility(View.INVISIBLE);
             ib_buy.setClickable(false);
+
+            tv_price.setVisibility(View.INVISIBLE);
 
             ib_setBg.setVisibility(View.VISIBLE);
             ib_setBg.setClickable(true);
         }else{
             ib_buy.setVisibility(View.VISIBLE);
             ib_buy.setClickable(true);
+
+            tv_price.setVisibility(View.VISIBLE);
+            tv_price.setText("PRICE: " + price + "$");
 
             ib_setBg.setVisibility(View.INVISIBLE);
             ib_setBg.setClickable(false);
