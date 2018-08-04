@@ -1,17 +1,14 @@
-# GymBuddy
-Tamagotchi style gym buddy application
+# Gym Buddy: Your personal virtual gym partner!
 
-Build it using Android Studio.
+App is now available in Google Play store for Android phones!
 
-Functionalities of the application so far:
-- Ability to log a workout
-- Ability to see past workouts
-- Ability to start/stop a workout
-- Timer when workout is started
-- Ability to complete daily challenges
-- Ability to complete weekly challenges
+Features to enjoy:
+- Log your workouts in real time or later in the day
+- Complete daily and weekly challenges for GymDo$$a
+- Demonstrate your dominance by going through the gyms
+       (Basic -> Bronze -> Silver -> Gold)
+- See your gym buddy get ripped!
 
-Functionalities to come:
-- Ability to shop new gyms
-- A more complex algorithm for gaining/losing weight
-- The more you workout the better your gym buddy will look
+Major updates upcoming:
+- A brand new redesigned "Log a workout page"
+- A better more intuitive UI for challenges!
