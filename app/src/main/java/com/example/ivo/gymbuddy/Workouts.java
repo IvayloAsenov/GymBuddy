@@ -8,12 +8,13 @@ public interface Workouts
 {
     String[] workouts_list = new String[]
             {
-                    "Run",
-                "Cycling",
                 "Chest",
                 "Back",
-                "Biceps",
-                "Triceps",
-                "Shoulders"
+                "Shoulders",
+                "Arms",
+                "Legs",
+                "Abs",
+                "Run",
+                "Other"
             };
 }

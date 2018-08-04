@@ -1,75 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ivo.gymbuddy.AddWorkout"
+    android:background="#D3D3D3"
     android:orientation="vertical"
-    android:background="#59d0dfff">
-
-    <Spinner
-        android:id="@+id/workouts_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="50dp">
-    </Spinner>
+    tools:context="com.example.ivo.gymbuddy.AddWorkout">
 
     <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#A9A9A9"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/add_workout_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/time_back"
+        android:gravity="center"
+        android:paddingBottom="40dp">
+
+        <Spinner
+            android:id="@+id/workouts_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"></Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_time_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/spinner"
+        android:background="#D3D3D3"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="11dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Time trained"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:text="How long did you workout?"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/et_time"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:layout_constraintBottom_creator="1"
             tools:layout_constraintLeft_creator="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_time_text"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="27dp"
+        android:background="#D3D3D3"
+        android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/et_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:id="@+id/et_time_hours"
+            android:layout_width="55dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/time_back"
             android:ems="10"
-            android:hint="minutes"
+            android:gravity="center"
+            android:hint="0"
             android:inputType="time"
-            />
+            android:maxLength="1"
+            android:textSize="56dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#D3D3D3"
+            android:gravity="center_vertical"
+            android:paddingTop="20dp"
+            android:text="hrs"
+            android:textSize="24dp" />
+
+        <EditText
+            android:id="@+id/et_time_minutes"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/time_back"
+            android:ems="10"
+            android:gravity="right|center_vertical"
+            android:hint="00"
+            android:inputType="time"
+            android:maxLength="2"
+            android:paddingRight="5dp"
+            android:textSize="56dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="0dp"
+            android:layout_weight="1"
+            android:background="#D3D3D3"
+            android:gravity="center_vertical"
+            android:paddingTop="20dp"
+            android:text="mins"
+            android:textSize="24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_time"
+        android:layout_marginTop="40dp"
+        android:background="#D3D3D3"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/b_save"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/button"
+            android:paddingTop="0dp"
+            android:shadowRadius="5"
+            android:text="Save" />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-    <Button
-        android:id="@+id/b_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:layout_centerHorizontal="true"
-        android:background="#6893ee"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <Button
-        android:id="@+id/b_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset"
+        android:layout_height="72dp"
         android:layout_alignParentBottom="true"
-        android:background="#4D6893ee"
-        />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:background="#A9A9A9">
+
+        <Button
+            android:id="@+id/b_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button"
+            android:clickable="false"
+            android:foregroundGravity="right"
+            android:text="Reset"
+            android:visibility="invisible" />
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -39,7 +39,8 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
     Spinner spinner_workouts;
     Button b_save;
-    EditText et_time;
+    EditText et_time_hours;
+    EditText et_time_minutes;
     Button b_reset;
     Context home_context;
     SaveFile sf;
@@ -57,7 +58,8 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
         spinner_workouts = (Spinner) findViewById(R.id.workouts_spinner);
         b_save = (Button) findViewById(R.id.b_save);
-        et_time = (EditText) findViewById(R.id.et_time);
+        et_time_hours = (EditText) findViewById(R.id.et_time_hours);
+        et_time_minutes = (EditText) findViewById(R.id.et_time_minutes);
 
         b_reset = (Button) findViewById(R.id.b_reset);
 
@@ -94,16 +96,25 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String message;
         String s_workout = spinner_workouts.getSelectedItem().toString();
 
-        String s_time = et_time.getText().toString();
-        int i_time = Integer.parseInt(s_time);
+        String s_time_hours = et_time_hours.getText().toString();
+        String s_time_minutes = et_time_minutes.getText().toString();
 
-        int hours = i_time / 60;
-        int minutes = i_time % 60;
+        if(s_time_hours.equals("") || s_time_minutes.equals("")) {
+            Toast.makeText(this.getApplicationContext(), "Bad input!", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        int hours = Integer.parseInt(s_time_hours);
+        int minutes = Integer.parseInt(s_time_minutes);
+
+        if(minutes >= 60) {
+            return;
+        }
 
         String s_minutes = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
         String s_hours = (hours == 0) ? "0" : Integer.toString(hours);
 
-        s_time = String.format("%02d", minutes) + ":" + "00"
+        String s_time = s_hours + ":" + String.format("%02d", minutes)
                 + ":" + "00";
 
         Calendar c = Calendar.getInstance();
