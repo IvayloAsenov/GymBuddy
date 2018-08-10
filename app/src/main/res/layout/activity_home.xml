@@ -93,9 +93,23 @@
                 android:layout_weight="1.2">
 
                 <ImageButton
+                    android:id="@+id/ib_challenges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="17dp"
+                    android:background="@null"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="31dp"
+                    app:srcCompat="@drawable/challenges_icon" />
+
+                <ImageButton
                     android:id="@+id/ib_startWorkout"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:background="@null"
                     app:srcCompat="@drawable/play_button" />
@@ -104,13 +118,13 @@
                     android:id="@+id/ib_pauseWorkout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:layout_weight="1.2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
                     android:background="@null"
+                    android:clickable="false"
                     android:paddingBottom="20dp"
                     android:paddingLeft="30dp"
-                    android:clickable="false"
                     android:visibility="invisible"
                     app:srcCompat="@drawable/pause_button" />
 
@@ -159,12 +173,12 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/navigation_menu">
+    <!--<android.support.design.widget.NavigationView-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--app:menu="@menu/navigation_menu">-->
 
-    </android.support.design.widget.NavigationView>
+    <!--</android.support.design.widget.NavigationView>-->
 </android.support.v4.widget.DrawerLayout>

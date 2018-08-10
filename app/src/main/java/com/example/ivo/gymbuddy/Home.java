@@ -51,6 +51,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
     ImageButton ib_startWorkout;
     ImageButton ib_pauseWorkout;
     ImageButton ib_stopWorkout;
+    ImageButton ib_challenges;
 
     int money=1500;
     String workout=""; // String that will hold the current workout
@@ -122,6 +123,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         ib_stopWorkout = (ImageButton) findViewById(R.id.ib_stopWorkout);
         ib_pauseWorkout = (ImageButton) findViewById(R.id.ib_pauseWorkout);
 
+        ib_challenges = (ImageButton) findViewById(R.id.ib_challenges);
         ib_shop = (ImageButton) findViewById(R.id.ib_shop);
 
         // Update money
@@ -150,7 +152,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         ib_startWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createDialog();
+                createCWDialog();
                 ib_startWorkout.setVisibility(View.INVISIBLE);
                 ib_startWorkout.setClickable(false);
                 ib_stopWorkout.setClickable(true);
@@ -232,6 +234,13 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 startActivity(intent);
             }
         });
+
+        ib_challenges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createChallengesDialog();
+            }
+        });
     }
 
     /**
@@ -239,8 +248,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
      * @param workout String workout
      * @param s_time String time
      */
-    public void formatMessage(String workout, String s_time)
-    {
+    public void formatMessage(String workout, String s_time) {
         String message;
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -253,9 +261,12 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
     /**
      * Creates a popup dialog that lets the user choose a workout
      */
-    private void createDialog()
-    {
+    private void createCWDialog() {
         cw.showDialog(t);
+    }
+
+    private void createChallengesDialog() {
+        c.showDialog();
     }
 
 

@@ -5,10 +5,13 @@
 package com.example.ivo.gymbuddy.ChallengePackage;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.ivo.gymbuddy.R;
@@ -34,6 +37,8 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
     Random rand;
 
     SharedPreferences sharedPref;
+
+    Dialog dialog;
 
     // Get Home's context
     public Challenges(Activity a){
@@ -109,8 +114,8 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("saved_daily_challenge", next_daily_challenge).apply();
 
-        nv = (NavigationView) activity.findViewById(R.id.navigation);
-        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
+//        nv = (NavigationView) activity.findViewById(R.id.navigation);
+//        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[next_daily_challenge]);
 
         // Reset the daily completed status
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
@@ -139,8 +144,8 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         editor.putInt("timeWorkout", 0).commit();
         editor.putInt("numWorkouts", 0).commit();
 
-        nv = (NavigationView) activity.findViewById(R.id.navigation);
-        nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[next_weekly_challenge]);
+//        nv = (NavigationView) activity.findViewById(R.id.navigation);
+//        nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[next_weekly_challenge]);
     }
 
     // Sets the daily challenge when app is ran
@@ -148,8 +153,8 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         sharedPref = activity.getApplicationContext().getSharedPreferences("saved_challenges", Context.MODE_PRIVATE);
         int stored_daily_challenge = sharedPref.getInt("saved_daily_challenge", 0);
 
-        nv = (NavigationView) activity.findViewById(R.id.navigation);
-        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[stored_daily_challenge]);
+//        nv = (NavigationView) activity.findViewById(R.id.navigation);
+//        nv.getMenu().findItem(R.id.account).setTitle(daily_challenges[stored_daily_challenge]);
     }
 
     // Sets the weekly challenge when app is ran
@@ -160,8 +165,8 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         //SharedPreferences.Editor editor = sharedPref.edit();
         //editor.putInt("saved_weekly_challenge", 0).commit();
 
-        nv = (NavigationView) activity.findViewById(R.id.navigation);
-        nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[stored_weekly_challenge]);
+//        nv = (NavigationView) activity.findViewById(R.id.navigation);
+//        nv.getMenu().findItem(R.id.user).setTitle(weekly_challenges[stored_weekly_challenge]);
     }
 
     // Gets the daily challenge when app is ran
@@ -176,4 +181,12 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         return sharedPref.getInt("saved_weekly_challenge", 0);
     }
 
+    public void showDialog() {
+
+        dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.challenge_view);
+
+        View v = LayoutInflater.from(activity).inflate(R.layout.challenge_view, null);
+        dialog.show();
+    }
 }
