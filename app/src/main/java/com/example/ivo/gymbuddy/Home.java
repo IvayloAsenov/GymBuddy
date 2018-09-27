@@ -161,6 +161,8 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_pauseWorkout.setVisibility(View.VISIBLE);
                 ib_shop.setVisibility(View.INVISIBLE);
                 ib_shop.setClickable(false);
+                ib_challenges.setVisibility(View.INVISIBLE);
+                ib_challenges.setClickable(false);
                 tv_scoreCounter.setVisibility(View.INVISIBLE);
             }
         });
@@ -177,6 +179,8 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_shop.setVisibility(View.VISIBLE);
                 ib_shop.setClickable(true);
                 tv_scoreCounter.setVisibility(View.VISIBLE);
+                ib_challenges.setVisibility(View.VISIBLE);
+                ib_challenges.setClickable(true);
 
                 workoutPaused = false;
                 ib_pauseWorkout.setImageResource(R.drawable.pause_button);
