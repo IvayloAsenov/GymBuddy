@@ -12,6 +12,8 @@ import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ivo.gymbuddy.R;
@@ -187,6 +189,31 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         dialog.setContentView(R.layout.challenge_view);
 
         View v = LayoutInflater.from(activity).inflate(R.layout.challenge_view, null);
+
+        int daily_challenge = getDailyChallenge();
+        String daily_challenge_text = v.getResources().getString(daily_challenges[daily_challenge]);
+
+        int weekly_challenge = getWeeklyChallenge();
+        String weekly_challenge_text = v.getResources().getString(weekly_challenges[weekly_challenge]);
+
+        TextView tv_daily_text = (TextView) dialog.findViewById(R.id.dailyChallenge);
+        tv_daily_text.setText(daily_challenge_text);
+
+        TextView tv_weekly_text = (TextView) dialog.findViewById(R.id.weeklyChallenge);
+        tv_weekly_text.setText(weekly_challenge_text);
+
+        ImageView iv_daily = (ImageView) dialog.findViewById(R.id.daily_checkmark);
+        ImageView iv_weekly = (ImageView) dialog.findViewById(R.id.weekly_checkmark);
+
+        InformationDailyChallenges idc = new InformationDailyChallenges(activity);
+        InformationWeeklyChallenges iwc = new InformationWeeklyChallenges(activity);
+
+        if (iwc.isCompleted())
+            iv_weekly.setImageResource(android.R.drawable.btn_star_big_on);
+
+        if (idc.isCompleted(daily_challenge))
+            iv_daily.setImageResource(android.R.drawable.btn_star_big_on);
+
         dialog.show();
     }
 }

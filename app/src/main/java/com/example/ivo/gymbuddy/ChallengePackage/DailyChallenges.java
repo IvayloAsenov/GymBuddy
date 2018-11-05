@@ -14,7 +14,7 @@ public interface DailyChallenges {
             R.string.daily_challenge_04,
             R.string.daily_challenge_05,
             R.string.daily_challenge_06
-                                    };
+    };
 
     int len = daily_challenges.length;
 

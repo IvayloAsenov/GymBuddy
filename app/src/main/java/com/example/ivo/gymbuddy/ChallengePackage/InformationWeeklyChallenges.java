@@ -34,6 +34,11 @@ public class InformationWeeklyChallenges {
         saved_completed = sharedPref.getInt("saved_completed", 0);
     }
 
+    public boolean isCompleted() {
+        if(saved_completed == 1) return true;
+        return false;
+    }
+
     public boolean checkCompletion(int challenge, int minutes, String workout) {
 
         // If completed == 1 just return false, cannot complete twice

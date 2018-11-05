@@ -32,6 +32,21 @@ public class InformationDailyChallenges {
         activity = a;
     }
 
+    public InformationDailyChallenges() {
+
+    }
+
+    public boolean isCompleted(int challenge) {
+        SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
+        saved_completed = sharedPref.getInt("saved_completed", 0);
+
+        // If completed == 1 just return false, cannot complete twice
+        if(saved_completed == 1)
+            return true;
+
+        return false;
+    }
+
     public boolean checkCompletion(int challenge, int minutes, String workout) {
 
         SharedPreferences sharedPref = activity.getApplicationContext().getSharedPreferences("saved_info_daily_challenges", Context.MODE_PRIVATE);
