@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/shop_sign" />
+            android:layout_weight="1"
+            app:srcCompat="@drawable/challenges_image" />
 
         <TextView
             android:id="@+id/dailyChallengeText"
