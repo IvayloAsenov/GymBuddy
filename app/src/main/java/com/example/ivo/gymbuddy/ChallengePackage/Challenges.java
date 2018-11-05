@@ -12,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -200,6 +201,18 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
 
         TextView tv_weekly_text = (TextView) dialog.findViewById(R.id.weeklyChallenge);
         tv_weekly_text.setText(weekly_challenge_text);
+
+        ImageView iv_daily = (ImageView) dialog.findViewById(R.id.daily_checkmark);
+        ImageView iv_weekly = (ImageView) dialog.findViewById(R.id.weekly_checkmark);
+
+        InformationDailyChallenges idc = new InformationDailyChallenges(activity);
+        InformationWeeklyChallenges iwc = new InformationWeeklyChallenges(activity);
+
+        if (iwc.isCompleted())
+            iv_weekly.setImageResource(android.R.drawable.btn_star_big_on);
+
+        if (idc.isCompleted(daily_challenge))
+            iv_daily.setImageResource(android.R.drawable.btn_star_big_on);
 
         dialog.show();
     }
