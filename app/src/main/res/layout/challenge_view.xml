@@ -49,8 +49,8 @@
                 android:layout_toLeftOf="@+id/dailyChallenge"
                 android:layout_weight="1"
                 android:paddingRight="5dp"
-                android:paddingTop="10dp"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                android:paddingTop="8dp"
+                app:srcCompat="@android:drawable/btn_star_big_off" />
 
             <TextView
                 android:id="@+id/dailyChallenge"
@@ -89,12 +89,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/weeklyChallengeText"
                 android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:layout_toLeftOf="@+id/weeklyChallenge"
                 android:layout_weight="1"
+                android:adjustViewBounds="true"
                 android:paddingRight="5dp"
-                android:paddingTop="10dp"
-                android:src="@android:drawable/btn_star_big_on"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                android:paddingTop="8dp"
+                android:src="@android:drawable/btn_star_big_off"
+                app:srcCompat="@android:drawable/btn_star_big_off" />
 
             <TextView
                 android:id="@+id/weeklyChallenge"

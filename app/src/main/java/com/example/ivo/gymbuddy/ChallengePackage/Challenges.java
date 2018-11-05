@@ -12,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ivo.gymbuddy.R;
@@ -187,6 +188,19 @@ public class Challenges implements DailyChallenges, WeeklyChallenges {
         dialog.setContentView(R.layout.challenge_view);
 
         View v = LayoutInflater.from(activity).inflate(R.layout.challenge_view, null);
+
+        int daily_challenge = getDailyChallenge();
+        String daily_challenge_text = v.getResources().getString(daily_challenges[daily_challenge]);
+
+        int weekly_challenge = getWeeklyChallenge();
+        String weekly_challenge_text = v.getResources().getString(weekly_challenges[weekly_challenge]);
+
+        TextView tv_daily_text = (TextView) dialog.findViewById(R.id.dailyChallenge);
+        tv_daily_text.setText(daily_challenge_text);
+
+        TextView tv_weekly_text = (TextView) dialog.findViewById(R.id.weeklyChallenge);
+        tv_weekly_text.setText(weekly_challenge_text);
+
         dialog.show();
     }
 }
