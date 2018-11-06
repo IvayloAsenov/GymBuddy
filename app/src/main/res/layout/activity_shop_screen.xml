@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#A9A9A9"
-    tools:context="com.example.ivo.gymbuddy.ShopScreen">
+    tools:context="com.k9.ivo.gymbuddy.ShopScreen">
 
     <LinearLayout
         android:layout_width="wrap_content"
