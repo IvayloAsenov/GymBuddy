@@ -127,7 +127,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
         ib_shop = (ImageButton) findViewById(R.id.ib_shop);
 
         // Update money
-        s.setCurrentScore(2000);
+        s.setCurrentScore(0);
         money = s.getCurrentScore();
 
         // Change activity -> add Workout
@@ -186,7 +186,7 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
                 ib_pauseWorkout.setImageResource(R.drawable.pause_button);
                 t.clear();
 
-                String s_time = t.stopTimer();
+                int[] s_time = t.stopTimer();
                 workout = cw.getWorkout();
                 formatMessage(workout, s_time);
 
@@ -252,13 +252,30 @@ public class Home extends AppCompatActivity implements BodyTypes, GymBackgrounds
      * @param workout String workout
      * @param s_time String time
      */
-    public void formatMessage(String workout, String s_time) {
+    public void formatMessage(String workout, int[] s_time) {
         String message;
+
+        int minutes = s_time[0];
+        int seconds = s_time[1];
+        int hours = minutes / 60;
+        minutes = minutes % 60;
+
+        String s_hours = Integer.toString(hours);
+        String s_minutes = Integer.toString(minutes);
+        String s_seconds = Integer.toString(seconds);
+
+        String formatted_minutes = (minutes < 10) ? "0" + Integer.toString(minutes) : Integer.toString(minutes);
+        String formatted_hours = (hours == 0) ? "0" : Integer.toString(hours);
+        String formatted_seconds = (seconds < 10) ? "0" + Integer.toString(seconds) : Integer.toString(seconds);
+
+        String formatted_time = formatted_hours + ":" + String.format("%02d", minutes)
+                + ":" + String.format("%02d", seconds);
+
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c.getTime());
 
-        message = "[" + formattedDate + " " + workout + " " + s_time + " ";
+        message = "[" + formattedDate + " " + workout + " " + formatted_time + " ";
         sf.saveToFile(message);
     }
 
