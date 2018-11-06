@@ -15,12 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +47,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
     Button b_reset;
     Context home_context;
     SaveFile sf;
+    TextView tv_muscle;
 
     /**
      * Create method
@@ -60,12 +64,26 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         b_save = (Button) findViewById(R.id.b_save);
         et_time_hours = (EditText) findViewById(R.id.et_time_hours);
         et_time_minutes = (EditText) findViewById(R.id.et_time_minutes);
+        tv_muscle = (TextView) findViewById(R.id.tv_muscle);
 
         b_reset = (Button) findViewById(R.id.b_reset);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, workouts_list);
 
         spinner_workouts.setAdapter(adapter);
+
+        spinner_workouts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String s = getWorkoutFromId(id);
+                tv_muscle.setText(s);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         b_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +105,18 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         });
     }
 
+    private String getWorkoutFromId(long id) {
+        if (id == 0)      return "Chest";
+        else if (id == 1) return "Back";
+        else if (id == 2) return "Shoulders";
+        else if (id == 3) return "Arms";
+        else if (id == 4) return "Legs";
+        else if (id == 5) return "Abs";
+        else if (id == 6) return "Run";
+        else if (id == 7) return "Other";
+
+        else return "Other";
+    }
     /**
      * Save method used to save data on file and read from it in
      * Append | Private mode
@@ -108,6 +138,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         int minutes = Integer.parseInt(s_time_minutes);
 
         if(minutes >= 60) {
+            Toast.makeText(this.getApplicationContext(), "Bad input!", Toast.LENGTH_LONG);
             return;
         }
 
@@ -122,6 +153,8 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String formattedDate = df.format(c.getTime());
 
         message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
+
+        Toast.makeText(this.getApplicationContext(), "Workout successfully logged!", Toast.LENGTH_SHORT);
         sf.saveToFile(message);
     }
 }
