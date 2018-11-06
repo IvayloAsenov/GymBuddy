@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#D3D3D3"
     android:orientation="vertical"
-    tools:context="com.example.ivo.gymbuddy.AddWorkout">
+    tools:context="com.k9.ivo.gymbuddy.AddWorkout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -187,7 +187,6 @@
             android:id="@+id/layout_time_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/spinner"
             android:background="#D3D3D3"
             android:orientation="horizontal">
 
