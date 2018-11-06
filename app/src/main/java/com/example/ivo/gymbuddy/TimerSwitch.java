@@ -39,7 +39,12 @@ class TimerSwitch {
         handler.postDelayed(runnable, 0);
     }
 
-    protected String stopTimer(){
+    protected int[] stopTimer(){
+
+        int[] returnValue = new int[2];
+        returnValue[0] = minutes;
+        returnValue[1] = seconds;
+
         MillisecondTime = 0L;
         StartTime = 0L;
         TimeBuff = 0L;
@@ -53,7 +58,7 @@ class TimerSwitch {
         String time = tv_timer.getText().toString();
         tv_timer.setText("00:00:00");
 
-        return time;
+        return returnValue;
     }
 
     protected int getMinutes(){

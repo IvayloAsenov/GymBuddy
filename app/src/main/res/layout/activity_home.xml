@@ -144,17 +144,17 @@
 
                 <TextView
                     android:id="@+id/tv_scoreCounter"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
                     android:paddingBottom="50dp"
-                    android:paddingRight="15dp"
-                    android:gravity="center"
+                    android:paddingRight="45dp"
                     android:text="0"
-                    android:textStyle="bold"
                     android:textColor="@android:color/holo_green_dark"
-                    android:textSize="32dp" />
+                    android:textSize="32dp"
+                    android:textStyle="bold" />
 
 
                 <ImageButton

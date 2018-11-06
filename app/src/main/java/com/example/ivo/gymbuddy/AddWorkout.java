@@ -130,7 +130,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         String s_time_minutes = et_time_minutes.getText().toString();
 
         if(s_time_hours.equals("") || s_time_minutes.equals("")) {
-            Toast.makeText(this.getApplicationContext(), "Bad input!", Toast.LENGTH_SHORT);
+            Toast.makeText(this.getApplicationContext(), "Bad input!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -138,7 +138,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
         int minutes = Integer.parseInt(s_time_minutes);
 
         if(minutes >= 60) {
-            Toast.makeText(this.getApplicationContext(), "Bad input!", Toast.LENGTH_LONG);
+            Toast.makeText(this.getApplicationContext(), "Bad input!", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -154,7 +154,7 @@ public class AddWorkout extends AppCompatActivity implements Workouts {
 
         message = "[" + formattedDate + " " + s_workout + " " + s_time + " ";
 
-        Toast.makeText(this.getApplicationContext(), "Workout successfully logged!", Toast.LENGTH_SHORT);
+        Toast.makeText(this.getApplicationContext(), "Workout successfully logged!", Toast.LENGTH_SHORT).show();
         sf.saveToFile(message);
     }
 }
